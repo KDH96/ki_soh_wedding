@@ -3,853 +3,93 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-    <meta name="theme-color" content="#fff9f1" />
-    <title>모바일 청첩장 · 종이 팝업 디자인 시안</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Gowun+Batang&family=Nanum+Myeongjo:wght@400;700;800&family=Pretendard:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <meta name="theme-color" content="#fbf5ef" />
+    <title>신랑 이름 ♥ 신부 이름 | 모바일 청첩장</title>
     <style>
-:root {
-  --ink: #29312b;
-  --muted: #667168;
-  --cream: #f7f3ee;
-  --paper: #fbfaf8;
-  --sage: #e8ece3;
-  --sage-deep: #71836f;
-  --line: rgba(41, 49, 43, .14);
-  --accent: #bd806b;
-  --shadow: 0 18px 45px rgba(51, 53, 47, .12);
-  color: var(--ink);
-  background: #e9e7e2;
-  font-family: Pretendard, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  font-synthesis: none;
-}
+@import url("https://fonts.googleapis.com/css2?family=Monsieur+La+Doulaise&display=swap");
 
-* { box-sizing: border-box; }
-html { scroll-behavior: smooth; }
-body { margin: 0; min-width: 320px; background: #e9e7e2; }
-button, input, textarea { font: inherit; }
-button, a { -webkit-tap-highlight-color: transparent; }
-button { cursor: pointer; }
-img { display: block; max-width: 100%; }
-a { color: inherit; text-decoration: none; }
-
-.page-shell { width: min(100%, 640px); min-height: 100vh; margin: 0 auto; overflow: hidden; background: var(--paper); box-shadow: 0 0 34px rgba(36, 40, 34, .14); }
-.section { position: relative; padding: 82px 28px; text-align: center; }
-.section--cream { background: var(--cream); }
-.section--sage { background: var(--sage); }
-.eyebrow { margin: 0 0 14px; color: var(--sage-deep); font-size: 10px; font-weight: 700; letter-spacing: .2em; }
-.section-title { margin: 0; font-family: "Gowun Batang", "Nanum Myeongjo", serif; font-size: clamp(25px, 6vw, 34px); font-weight: 400; line-height: 1.45; letter-spacing: -.04em; }
-.section-description { margin: 12px 0 28px; color: var(--muted); font-size: 13px; line-height: 1.7; }
-
-.hero { min-height: max(680px, 100svh); display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 70px 28px 36px; background: #e8ece3; isolation: isolate; }
-.hero__paper-grain { position: absolute; z-index: -1; inset: 0; opacity: .5; background-image: radial-gradient(rgba(47, 53, 45, .15) .6px, transparent .6px); background-size: 7px 7px; mask-image: linear-gradient(to bottom, transparent, black 30%, black 70%, transparent); }
-.hero__names { max-width: 420px; margin: 0; font-family: "Gowun Batang", "Nanum Myeongjo", serif; font-size: clamp(29px, 7.5vw, 45px); font-weight: 400; line-height: 1.35; letter-spacing: -.075em; }
-.hero__names span { margin: 0 5px; color: var(--accent); font-family: Georgia, serif; font-size: .78em; font-style: italic; }
-.hero__date { margin: 17px 0 35px; color: var(--muted); font-size: 12px; font-weight: 600; letter-spacing: .08em; }
-.hero__photo-wrap { width: min(72vw, 350px); aspect-ratio: 4 / 5; overflow: hidden; padding: 8px; background: #fffdf9; box-shadow: var(--shadow); transform: rotate(2deg); }
-.hero__photo-wrap img { width: 100%; height: 100%; object-fit: cover; }
-.floating-photo { animation: float 5s ease-in-out infinite; }
-.scroll-cue { display: grid; place-items: start center; width: 26px; height: 46px; margin-top: 32px; border: 1px solid rgba(41, 49, 43, .5); border-radius: 20px; }
-.scroll-cue span { width: 3px; height: 8px; margin-top: 9px; border-radius: 2px; background: var(--sage-deep); animation: scroll-dot 1.8s ease-in-out infinite; }
-
-.message__body { margin: 31px auto 35px; white-space: pre-line; color: #3e473f; font-family: "Nanum Myeongjo", serif; font-size: 15px; line-height: 2.15; letter-spacing: -.025em; }
-.parents { display: grid; gap: 12px; max-width: 310px; margin: 0 auto; padding: 22px 0 0; border-top: 1px solid var(--line); }
-.parent-row { display: flex; align-items: baseline; justify-content: center; gap: 7px; font-family: "Nanum Myeongjo", serif; font-size: 14px; }
-.parent-row small { min-width: 51px; color: var(--muted); font-family: Pretendard, sans-serif; font-size: 11px; text-align: left; }
-.parent-row em { color: var(--muted); font-size: 11px; font-style: normal; }
-
-.calendar { padding-top: 80px; }
-.calendar .section-title { margin-bottom: 29px; font-size: 23px; }
-.calendar-card { max-width: 390px; margin: 0 auto; padding: 18px 16px 16px; border: 1px solid var(--line); background: #fff; box-shadow: 0 8px 18px rgba(57, 63, 55, .04); }
-.calendar-card__head { display: flex; align-items: center; justify-content: space-between; margin: 0 4px 15px; }
-.calendar-card__head strong { font-family: "Nanum Myeongjo", serif; font-size: 16px; }
-.calendar-card__head button { width: 32px; height: 28px; border: 0; color: #b8bdb7; background: transparent; font-size: 24px; line-height: 1; }
-.calendar-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 5px 2px; }
-.calendar-grid span { display: grid; place-items: center; height: 35px; font-size: 12px; }
-.calendar-grid--days span { height: 24px; color: var(--muted); font-size: 10px; }
-.calendar-grid--days span:first-child, .calendar-grid span:nth-child(7n + 1) { color: #be756b; }
-.calendar-day--empty { pointer-events: none; }
-.calendar-day--wedding { position: relative; z-index: 0; color: white !important; font-weight: 700; }
-.calendar-day--wedding::before { position: absolute; z-index: -1; width: 31px; height: 31px; border-radius: 50%; background: var(--accent); content: ""; }
-.countdown { display: flex; justify-content: center; gap: 11px; margin-top: 31px; }
-.countdown__unit { min-width: 60px; }
-.countdown__unit strong { display: block; font-family: "Nanum Myeongjo", serif; font-size: 21px; font-weight: 400; }
-.countdown__unit span { color: var(--muted); font-size: 9px; letter-spacing: .08em; }
-
-.moments__collage { position: relative; width: min(100%, 470px); height: 440px; margin: 35px auto 0; }
-.moment { position: absolute; overflow: hidden; padding: 6px; background: #fffdf9; box-shadow: 0 14px 28px rgba(51, 61, 51, .15); }
-.moment img { width: 100%; height: 100%; object-fit: cover; }
-.moment:nth-child(1) { top: 6px; left: 2%; width: 52%; height: 276px; transform: rotate(-4deg); animation: drift-a 7s ease-in-out infinite; }
-.moment:nth-child(2) { top: 142px; right: 2%; width: 47%; height: 268px; transform: rotate(5deg); animation: drift-b 8s ease-in-out infinite; }
-.moment:nth-child(3) { top: 47px; right: 7%; width: 35%; height: 156px; transform: rotate(7deg); animation: drift-c 6.5s ease-in-out infinite; }
-
-.gallery-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; }
-.gallery-item { position: relative; min-height: 190px; overflow: hidden; border: 0; background: #e5e5df; }
-.gallery-item:nth-child(3n + 1) { grid-row: span 2; min-height: 388px; }
-.gallery-item img { width: 100%; height: 100%; position: absolute; inset: 0; object-fit: cover; transition: transform .5s ease; }
-.gallery-item::after { position: absolute; inset: 0; background: rgba(27, 32, 26, .1); content: ""; opacity: 0; transition: opacity .25s ease; }
-.gallery-item:hover img, .gallery-item:focus-visible img { transform: scale(1.04); }
-.gallery-item:hover::after, .gallery-item:focus-visible::after { opacity: 1; }
-.gallery__more { margin-top: 25px; }
-
-.map-card { display: grid; place-items: center; min-height: 185px; margin-top: 29px; overflow: hidden; border: 1px solid var(--line); background: repeating-linear-gradient(45deg, rgba(112, 131, 111, .09) 0 2px, transparent 2px 28px), #e3e9df; }
-.map-card__pin { display: grid; place-items: center; width: 45px; height: 45px; margin: 0 auto 10px; border-radius: 50% 50% 50% 0; color: #fff; background: var(--accent); transform: rotate(-45deg); box-shadow: 0 3px 8px rgba(106, 67, 57, .2); }
-.map-card__pin::first-letter { transform: rotate(45deg); }
-.map-card p { margin: 0; color: var(--ink); font-size: 13px; font-weight: 600; }
-.location__address { margin: 12px 0 0; color: var(--muted); font-size: 13px; line-height: 1.7; }
-.location__buttons { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 12px; }
-.button { display: inline-flex; align-items: center; justify-content: center; min-height: 48px; padding: 12px 16px; border: 1px solid transparent; border-radius: 0; font-size: 13px; font-weight: 600; transition: transform .18s ease, background .18s ease; }
-.button:hover { transform: translateY(-1px); }
-.button--dark { color: white; background: var(--ink); }
-.button--outline { border-color: rgba(41, 49, 43, .35); color: var(--ink); background: transparent; }
-.transport { display: grid; gap: 0; margin-top: 31px; border-top: 1px solid var(--line); text-align: left; }
-.transport__row { display: grid; grid-template-columns: 62px 1fr; gap: 10px; padding: 17px 3px; border-bottom: 1px solid var(--line); font-size: 13px; line-height: 1.6; }
-.transport__row strong { font-size: 12px; }
-.transport__row span { color: var(--muted); }
-
-.accounts__list { display: grid; gap: 10px; margin-top: 29px; text-align: left; }
-.account { padding: 17px 17px 15px; border: 1px solid var(--line); background: #fff; }
-.account__top { display: flex; align-items: baseline; justify-content: space-between; gap: 10px; }
-.account__group { color: var(--sage-deep); font-size: 11px; font-weight: 700; }
-.account__name { font-size: 14px; font-weight: 700; }
-.account__number { margin: 10px 0 0; color: var(--muted); font-family: "Nanum Myeongjo", serif; font-size: 14px; letter-spacing: .025em; }
-.account button { float: right; margin-top: -3px; padding: 4px 0 4px 10px; border: 0; color: var(--sage-deep); background: transparent; font-size: 11px; font-weight: 700; }
-
-.guestbook-form { display: grid; gap: 12px; margin-top: 29px; text-align: left; }
-.guestbook-form label { display: grid; gap: 7px; color: var(--ink); font-size: 12px; font-weight: 600; }
-.guestbook-form input, .guestbook-form textarea { width: 100%; border: 1px solid rgba(41, 49, 43, .22); border-radius: 0; outline: none; color: var(--ink); background: rgba(255, 255, 255, .67); font-size: 14px; font-weight: 400; transition: border-color .2s; }
-.guestbook-form input { height: 47px; padding: 0 13px; }
-.guestbook-form textarea { min-height: 112px; padding: 13px; resize: vertical; line-height: 1.6; }
-.guestbook-form input:focus, .guestbook-form textarea:focus { border-color: var(--sage-deep); }
-.guestbook-form input::placeholder, .guestbook-form textarea::placeholder { color: #9a9d97; }
-.turnstile { min-height: 0; }
-.form-message { min-height: 20px; margin: -2px 0 0; color: var(--sage-deep); font-size: 12px; line-height: 1.6; }
-.form-message--error { color: #ab5e55; }
-.honeypot { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
-.guestbook-list { display: grid; gap: 10px; margin-top: 36px; text-align: left; }
-.guestbook-entry { padding: 17px; border-left: 2px solid var(--sage-deep); background: rgba(255, 255, 255, .48); }
-.guestbook-entry__meta { display: flex; align-items: center; justify-content: space-between; gap: 12px; color: var(--muted); font-size: 11px; }
-.guestbook-entry__meta strong { color: var(--ink); font-size: 13px; }
-.guestbook-entry p { margin: 11px 0 0; white-space: pre-wrap; font-size: 13px; line-height: 1.7; }
-.guestbook-empty { margin: 0; color: var(--muted); font-size: 13px; text-align: center; }
-
-.footer { padding: 34px 25px calc(34px + env(safe-area-inset-bottom)); color: rgba(255, 255, 255, .8); background: var(--ink); font-family: "Nanum Myeongjo", serif; font-size: 12px; line-height: 1.7; text-align: center; }
-.toast { position: fixed; z-index: 30; bottom: 28px; left: 50%; max-width: calc(100% - 38px); padding: 12px 16px; border-radius: 4px; color: white; background: rgba(34, 42, 35, .92); box-shadow: var(--shadow); font-size: 13px; opacity: 0; pointer-events: none; transform: translate(-50%, 12px); transition: .25s ease; }
-.toast--visible { opacity: 1; transform: translate(-50%, 0); }
-
-.lightbox { width: min(100%, 640px); height: 100dvh; max-width: none; max-height: none; padding: 55px 15px 30px; border: 0; color: white; background: rgba(18, 23, 18, .97); }
-.lightbox::backdrop { background: rgba(18, 23, 18, .7); }
-.lightbox figure { display: grid; align-items: center; height: 100%; margin: 0; }
-.lightbox figure img { width: 100%; max-height: calc(100dvh - 118px); object-fit: contain; }
-.lightbox figcaption { margin-top: 12px; color: rgba(255, 255, 255, .75); font-size: 12px; text-align: center; }
-.lightbox__close, .lightbox__nav { position: absolute; z-index: 1; border: 0; color: white; background: transparent; }
-.lightbox__close { top: 14px; right: 17px; font-size: 34px; font-weight: 200; }
-.lightbox__nav { top: 50%; padding: 12px 8px; font-size: 42px; line-height: 1; transform: translateY(-50%); }
-.lightbox__nav--prev { left: 3px; }.lightbox__nav--next { right: 3px; }
-
-@keyframes float { 0%, 100% { transform: rotate(2deg) translateY(0); } 50% { transform: rotate(2deg) translateY(-7px); } }
-@keyframes scroll-dot { 0%, 100% { transform: translateY(0); opacity: .6; } 50% { transform: translateY(15px); opacity: 1; } }
-@keyframes drift-a { 0%, 100% { transform: rotate(-4deg) translate(0, 0); } 50% { transform: rotate(-4deg) translate(0, -7px); } }
-@keyframes drift-b { 0%, 100% { transform: rotate(5deg) translate(0, 0); } 50% { transform: rotate(5deg) translate(0, 8px); } }
-@keyframes drift-c { 0%, 100% { transform: rotate(7deg) translate(0, 0); } 50% { transform: rotate(7deg) translate(5px, -5px); } }
-
-@media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
-}
-@media (min-width: 641px) { .section { padding-left: 43px; padding-right: 43px; } }
-
-</style>
-    <style>
-:root {
-  --warm-ink: #55483f;
-  --warm-muted: #8c786b;
-  --warm-rose: #d7927e;
-  --warm-peach: #f7e7dd;
-  --warm-cream: #fffaf4;
-  --warm-sage: #dfe8d9;
-  --warm-line: rgba(102, 76, 61, .13);
-}
-
-html { background: #f5eee7; }
-body.warm-preview { color: var(--warm-ink); background: radial-gradient(circle at 20% 0, #fff8f0 0 24%, transparent 48%), #f4eee7; }
-.warm-preview .page-shell { background: var(--warm-cream); box-shadow: 0 16px 55px rgba(105, 70, 52, .12); }
-.warm-preview .section { padding-top: 76px; padding-bottom: 76px; }
-.warm-preview .section--cream { background: linear-gradient(155deg, #fff9f3, #faeee6); }
-.warm-preview .section--sage { background: linear-gradient(150deg, #eaf0e4, #dce8d7); }
-.warm-preview .eyebrow { color: var(--warm-rose); letter-spacing: .24em; }
-.warm-preview .section-title, .warm-preview .hero__names { color: var(--warm-ink); }
-.warm-preview .section-description, .warm-preview .location__address { color: var(--warm-muted); }
-
-.warm-preview .hero { overflow: hidden; background: radial-gradient(circle at 50% 24%, rgba(255,255,255,.9), transparent 38%), linear-gradient(150deg, #f9ebe2, #e4eddc 76%); }
-.warm-preview .hero::before, .warm-preview .hero::after { position: absolute; z-index: -1; width: 210px; height: 210px; border-radius: 50%; background: rgba(255, 250, 244, .55); content: ""; filter: blur(1px); }
-.warm-preview .hero::before { top: -78px; left: -75px; }.warm-preview .hero::after { right: -102px; bottom: 56px; background: rgba(211, 230, 202, .55); }
-.warm-preview .hero__names span { color: var(--warm-rose); }
-.warm-preview .hero__date { color: var(--warm-muted); }
-.warm-preview .hero__photo-wrap { padding: 9px; border-radius: 48% 48% 42% 42% / 33% 33% 13% 13%; background: #fffaf5; box-shadow: 0 18px 42px rgba(115, 77, 57, .16); transform: rotate(1.5deg); }
-.warm-preview .hero__photo-wrap img { border-radius: 45% 45% 39% 39% / 31% 31% 11% 11%; }
-.warm-preview .floating-photo { animation-name: warm-float; }
-.warm-preview .scroll-cue { width: 30px; height: 44px; border-color: rgba(154, 112, 91, .5); background: rgba(255,255,255,.27); }
-.warm-preview .scroll-cue span { background: var(--warm-rose); }
-
-.warm-preview .message__body { color: #65564c; }.warm-preview .parents { border-color: var(--warm-line); }.warm-preview .parent-row small, .warm-preview .parent-row em { color: var(--warm-muted); }
-.warm-preview .calendar-card { padding: 19px 17px 17px; border: 0; border-radius: 25px; background: rgba(255, 255, 255, .78); box-shadow: 0 12px 28px rgba(119, 86, 69, .09); }
-.warm-preview .calendar-card__head strong { color: var(--warm-ink); }.warm-preview .calendar-grid--days span { color: var(--warm-muted); }.warm-preview .calendar-grid--days span:first-child, .warm-preview .calendar-grid span:nth-child(7n + 1) { color: #c98279; }
-.warm-preview .calendar-day--wedding::before { width: 33px; height: 33px; background: var(--warm-rose); box-shadow: 0 4px 10px rgba(215, 146, 126, .25); }.warm-preview .countdown__unit strong { color: var(--warm-ink); }.warm-preview .countdown__unit span { color: var(--warm-muted); }
-
-.warm-preview .moments__collage { margin-top: 32px; }.warm-preview .moment { padding: 7px; border-radius: 27px; background: rgba(255, 253, 249, .92); box-shadow: 0 15px 27px rgba(105, 77, 63, .15); }.warm-preview .moment img { border-radius: 22px; }
-.warm-preview .gallery-grid { gap: 11px; }.warm-preview .gallery-item { border-radius: 21px; box-shadow: 0 7px 18px rgba(105, 77, 63, .08); }.warm-preview .gallery-item:nth-child(3n + 1) { border-radius: 27px; }.warm-preview .gallery-item--warm-hidden { display: none; }
-.warm-preview .button { min-height: 49px; border-radius: 999px; padding-left: 21px; padding-right: 21px; }.warm-preview .button--dark { background: #8c6858; box-shadow: 0 8px 16px rgba(113, 77, 59, .16); }.warm-preview .button--outline { border-color: rgba(140, 104, 88, .3); color: #825f50; background: rgba(255,255,255,.48); }.warm-preview .button:active { transform: scale(.97); }
-
-.warm-preview .map-card { border: 0; border-radius: 25px; background: repeating-linear-gradient(45deg, rgba(220, 188, 164, .13) 0 2px, transparent 2px 28px), #e9f0e4; box-shadow: inset 0 0 0 1px rgba(109, 92, 75, .08); }.warm-preview .map-card__pin { background: var(--warm-rose); }.warm-preview .transport { border-color: var(--warm-line); }.warm-preview .transport__row { border-color: var(--warm-line); }.warm-preview .transport__row span { color: var(--warm-muted); }
-.warm-preview .account { border: 0; border-radius: 19px; background: #fffdfa; box-shadow: 0 7px 17px rgba(121, 89, 68, .07); }.warm-preview .account__group, .warm-preview .account button { color: var(--warm-rose); }.warm-preview .account__number { color: var(--warm-muted); }
-.warm-preview .guestbook-form input, .warm-preview .guestbook-form textarea { border-color: rgba(140, 104, 88, .2); border-radius: 15px; background: rgba(255,255,255,.72); }.warm-preview .guestbook-form input:focus, .warm-preview .guestbook-form textarea:focus { border-color: var(--warm-rose); box-shadow: 0 0 0 3px rgba(215,146,126,.13); }.warm-preview .guestbook-entry { border-left: 0; border-radius: 17px; background: rgba(255,255,255,.58); box-shadow: 0 6px 15px rgba(104, 87, 66, .05); }.warm-preview .guestbook-entry__meta { color: var(--warm-muted); }.warm-preview .footer { background: #6d5549; }
-
-.warm-preview .reveal { opacity: 0; transform: translateY(26px) scale(.985); transition: opacity .72s cubic-bezier(.22,.61,.36,1), transform .72s cubic-bezier(.22,.61,.36,1); }.warm-preview .reveal.is-visible { opacity: 1; transform: translateY(0) scale(1); }
-.warm-preview .gallery-sheet { width: min(100%, 640px); max-width: none; height: min(78dvh, 700px); margin: auto 0 0; padding: 24px 21px calc(28px + env(safe-area-inset-bottom)); border: 0; border-radius: 31px 31px 0 0; color: var(--warm-ink); background: #fffaf6; box-shadow: 0 -18px 60px rgba(76, 53, 40, .2); transform: translateY(36px); opacity: 0; transition: transform .3s ease, opacity .3s ease, overlay .3s allow-discrete, display .3s allow-discrete; }
-.warm-preview .gallery-sheet[open] { transform: translateY(0); opacity: 1; }.warm-preview .gallery-sheet::backdrop { background: rgba(83, 57, 45, .42); backdrop-filter: blur(2px); opacity: 0; transition: opacity .3s ease, overlay .3s allow-discrete, display .3s allow-discrete; }.warm-preview .gallery-sheet[open]::backdrop { opacity: 1; }
-@starting-style { .warm-preview .gallery-sheet[open] { transform: translateY(36px); opacity: 0; } .warm-preview .gallery-sheet[open]::backdrop { opacity: 0; } }
-.warm-preview .gallery-sheet__handle { width: 38px; height: 4px; margin: -8px auto 17px; border-radius: 99px; background: #e6d7ce; }.warm-preview .gallery-sheet__head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 19px; }.warm-preview .gallery-sheet__head h2 { margin: 0; font-family: "Gowun Batang", serif; font-size: 23px; font-weight: 400; }.warm-preview .gallery-sheet__head button { width: 35px; height: 35px; border: 0; border-radius: 50%; color: var(--warm-ink); background: #f4e8e1; font-size: 24px; }.warm-preview .gallery-sheet__grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; max-height: calc(78dvh - 113px); overflow: auto; padding-bottom: 3px; }.warm-preview .gallery-sheet__item { aspect-ratio: 1; overflow: hidden; padding: 0; border: 0; border-radius: 15px; background: #f2e5dd; }.warm-preview .gallery-sheet__item img { width: 100%; height: 100%; object-fit: cover; transition: transform .35s ease; }.warm-preview .gallery-sheet__item:active img { transform: scale(.96); }
-
-@keyframes warm-float { 0%, 100% { transform: rotate(1.5deg) translateY(0); } 50% { transform: rotate(1.5deg) translateY(-8px); } }
-@media (prefers-reduced-motion: reduce) { .warm-preview .reveal { opacity: 1; transform: none; transition: none; } .warm-preview .gallery-sheet, .warm-preview .gallery-sheet::backdrop { transition: none; } }
-
-</style>
-    <style>
-:root { --paper-ivory: #fff9f1; --paper-pink: #f4ded3; --paper-blush: #e7b7a5; --paper-ink: #674e43; --paper-shadow: rgba(105, 74, 59, .16); }
-
-body.popup-preview { background: radial-gradient(circle at 50% 0, #fff9f0 0, #efe1d7 53%, #dfcbbd 100%); }
-.popup-preview .page-shell { background: #f9eee5; box-shadow: 0 22px 75px rgba(92, 60, 45, .22); }
-.popup-preview .hero { isolation: isolate; background: linear-gradient(145deg, #f6dfd3, #eef1e3); }
-.popup-preview .hero::before { z-index: -1; top: auto; bottom: -55px; left: -14%; width: 130%; height: 155px; border-radius: 50% 50% 0 0 / 42% 42% 0 0; background: #fff8f0; box-shadow: 0 -13px 0 rgba(239, 218, 206, .55); transform: perspective(500px) rotateX(18deg); }
-.popup-preview .hero::after { z-index: -2; right: -80px; bottom: -85px; width: 310px; height: 170px; border-radius: 50%; background: rgba(221, 190, 172, .42); }
-
-.popup-preview .section:not(.hero) { position: relative; z-index: 1; margin-top: -1px; overflow: visible; border-radius: 34px 34px 0 0; box-shadow: 0 -10px 0 rgba(255, 251, 246, .66), 0 -18px 31px rgba(108, 78, 61, .045); }
-.popup-preview .section:not(.hero)::before { position: absolute; z-index: -1; top: -14px; left: 9%; width: 82%; height: 37px; border-radius: 50% 50% 0 0 / 100% 100% 0 0; background: inherit; box-shadow: 0 -7px 15px rgba(119, 87, 67, .05); content: ""; transform: perspective(460px) rotateX(-12deg); transform-origin: bottom; }
-.popup-preview .section.reveal.is-visible::before { animation: paper-unfold .72s cubic-bezier(.2,.75,.25,1) both; }
-.popup-preview .message { z-index: 3; }.popup-preview .photo-story { z-index: 4; padding-top: 90px; background: linear-gradient(152deg, #eaf0e5 0%, #e2ecdd 62%, #f8ebdf 100%); }.popup-preview .calendar { z-index: 5; background: var(--paper-ivory); }.popup-preview .location { z-index: 6; }.popup-preview .accounts { z-index: 7; background: #fffaf5; }.popup-preview .guestbook { z-index: 8; }.popup-preview .footer { position: relative; z-index: 9; }
-
-.popup-preview .photo-story::after { position: absolute; top: 28px; left: calc(50% - 37px); width: 74px; height: 24px; border-radius: 0 0 50% 50%; background: #f6e0d5; content: ""; box-shadow: 0 5px 9px rgba(128, 92, 70, .09); transform: perspective(240px) rotateX(-22deg); }
-.popup-preview .photo-story .section-title { margin-bottom: 8px; }.popup-preview .photo-story .section-description { margin-bottom: 25px; }
-.popup-preview .photo-story .moments__collage { margin-top: 12px; }.popup-preview .photo-story .gallery-grid { margin-top: 28px; }.popup-preview .photo-story .gallery__more { margin-top: 24px; }
-.popup-preview .photo-story .moment { box-shadow: 0 16px 29px rgba(101, 75, 60, .19); }.popup-preview .photo-story .gallery-item { box-shadow: 0 9px 20px rgba(101, 75, 60, .12); }
-
-.popup-preview .lightbox { display: grid; place-items: center; width: min(100%, 640px); height: 100dvh; padding: 45px 17px 27px; background: radial-gradient(circle at 50% 28%, #f1d6c8 0, #b98b78 44%, #6d5148 100%); }
-.popup-preview .lightbox::before { position: absolute; inset: 16px; border: 1px solid rgba(255, 246, 234, .53); border-radius: 30px; content: ""; pointer-events: none; }
-.popup-preview .lightbox::after { position: absolute; inset: 25px; border: 8px solid rgba(255, 248, 238, .22); border-radius: 24px; content: ""; pointer-events: none; }
-.popup-preview .lightbox::backdrop { background: rgba(96, 65, 53, .53); backdrop-filter: blur(3px); }
-.popup-preview .lightbox figure { position: relative; z-index: 1; display: grid; align-items: center; width: 100%; max-height: 100%; padding: 9px 9px 12px; border: 7px solid #f9ebdc; border-radius: 28px 28px 23px 23px; background: #fdf7ee; box-shadow: 0 17px 35px rgba(53, 34, 28, .28), inset 0 0 0 1px rgba(142, 99, 78, .22); }
-.popup-preview .lightbox figure::after { position: absolute; z-index: -1; right: 10%; bottom: -18px; left: 10%; height: 25px; border-radius: 50%; background: rgba(55, 32, 24, .24); content: ""; filter: blur(8px); }
-.popup-preview .lightbox figure img { max-height: calc(100dvh - 172px); border-radius: 18px 18px 14px 14px; }.popup-preview .lightbox figcaption { padding-top: 9px; color: #765847; font-family: "Nanum Myeongjo", serif; font-size: 12px; }
-.popup-preview .lightbox__close, .popup-preview .lightbox__nav { z-index: 3; display: grid; place-items: center; width: 43px; height: 43px; border: 1px solid rgba(255, 248, 238, .48); border-radius: 50%; color: #fffaf2; background: rgba(96, 61, 48, .36); box-shadow: 0 5px 12px rgba(69, 42, 32, .14); backdrop-filter: blur(3px); }
-.popup-preview .lightbox__close { top: 24px; right: 25px; font-size: 29px; }.popup-preview .lightbox__nav { top: 50%; padding: 0; font-size: 32px; }.popup-preview .lightbox__nav--prev { left: 23px; }.popup-preview .lightbox__nav--next { right: 23px; }
-.popup-preview .lightbox #lightboxImage.slide-next { animation: photo-in-next .34s cubic-bezier(.22,.61,.36,1); }.popup-preview .lightbox #lightboxImage.slide-prev { animation: photo-in-prev .34s cubic-bezier(.22,.61,.36,1); }
-
-@keyframes paper-unfold { from { transform: perspective(460px) rotateX(-43deg); opacity: .35; } to { transform: perspective(460px) rotateX(-12deg); opacity: 1; } }
-@keyframes photo-in-next { from { opacity: .35; transform: translateX(26px) scale(.98); } to { opacity: 1; transform: translateX(0) scale(1); } }
-@keyframes photo-in-prev { from { opacity: .35; transform: translateX(-26px) scale(.98); } to { opacity: 1; transform: translateX(0) scale(1); } }
-@media (max-width: 420px) { .popup-preview .lightbox__nav { top: auto; bottom: 31px; }.popup-preview .lightbox__nav--prev { left: calc(50% - 54px); }.popup-preview .lightbox__nav--next { right: calc(50% - 54px); }.popup-preview .lightbox figure img { max-height: calc(100dvh - 220px); } }
-@media (prefers-reduced-motion: reduce) { .popup-preview .section.reveal.is-visible::before, .popup-preview .lightbox #lightboxImage.slide-next, .popup-preview .lightbox #lightboxImage.slide-prev { animation: none; } }
+:root { --ink:#514139; --muted:#8c7468; --rose:#c98983; --line:rgba(93,72,63,.14); --script:"Monsieur La Doulaise","Snell Roundhand","Brush Script MT",cursive; }
+* { box-sizing:border-box; } html { background:#ded1c5; scroll-behavior:smooth; } body { min-width:320px; margin:0; color:var(--ink); background:radial-gradient(circle at 50% 0,#fffdfa 0,#f5e5db 46%,#d9c3b6 100%); font-family:Pretendard,"Apple SD Gothic Neo","Noto Sans KR",sans-serif; } button,a { -webkit-tap-highlight-color:transparent; } button { cursor:pointer; font:inherit; } img { display:block; max-width:100%; }
+.scene { position:fixed; z-index:5; inset:0; overflow:hidden; pointer-events:none; }.scene::before { position:absolute; inset:0; background:radial-gradient(circle at 20% 25%,rgba(255,255,255,.12),transparent 22%),radial-gradient(circle at 78% 72%,rgba(215,173,165,.1),transparent 25%); content:""; }.scene__petals { position:absolute; inset:0; overflow:hidden; }.petal { position:absolute; top:0; left:var(--x); width:var(--s); height:calc(var(--s) * .7); opacity:var(--opacity,.42); will-change:transform,opacity; animation:petalFall var(--d,24s) cubic-bezier(.38,.08,.64,.94) 1 both; }.petal::before { display:block; width:100%; height:100%; border-radius:88% 0 88% 88%; background:linear-gradient(135deg,#ffe8e6,#cf7c87); box-shadow:0 2px 5px rgba(156,95,98,.15); content:""; transform:rotate(var(--angle)); }
+.app { position:relative; z-index:1; width:min(100%,640px); min-height:100vh; margin:0 auto; overflow:hidden; background:rgba(251,245,239,.88); box-shadow:0 20px 60px rgba(81,54,44,.18); }.hero { position:relative; min-height:100svh; padding:39px 27px 44px; overflow:hidden; background-image:linear-gradient(180deg,rgba(45,31,28,.34) 0%,rgba(45,31,28,.03) 38%,rgba(45,31,28,.54) 100%),var(--hero-image); background-position:center; background-size:cover; text-align:center; }.hero::after { position:absolute; inset:0; background:linear-gradient(180deg,rgba(255,255,255,.08),transparent 45%,rgba(35,23,21,.16)); content:""; pointer-events:none; }.hero__content { position:relative; z-index:1; display:flex; flex-direction:column; justify-content:space-between; min-height:calc(100svh - 83px); }.hero__title { margin:0; color:#fffaf7; font-family:var(--script); font-size:clamp(51px,16vw,84px); font-weight:400; line-height:.8; text-shadow:0 2px 19px rgba(38,23,19,.38); }.hero__bottom { margin-top:auto; color:#fffaf7; text-shadow:0 2px 17px rgba(38,23,19,.48); }.hero__names { margin:0; font-family:"Gowun Batang","Nanum Myeongjo",serif; font-size:clamp(27px,7.4vw,40px); font-weight:400; letter-spacing:-.07em; }.hero__names span { margin:0 5px; font-family:Georgia,serif; font-size:.7em; font-style:italic; }.hero__date { margin:30px 0 0; font-size:12px; font-weight:700; letter-spacing:.07em; }
+.eyebrow { margin:0 0 9px; color:var(--rose); font-size:10px; font-weight:800; letter-spacing:.24em; }.section { position:relative; padding:76px 27px; text-align:center; background:rgba(251,245,239,.9); }.section--cream { background:linear-gradient(155deg,rgba(255,250,246,.96),rgba(248,235,229,.94)); }.section--sage { background:linear-gradient(150deg,rgba(238,242,233,.95),rgba(223,234,219,.94)); }.section-title { margin:0; font-family:"Gowun Batang","Nanum Myeongjo",serif; font-size:clamp(25px,6.5vw,34px); font-weight:400; line-height:1.45; letter-spacing:-.05em; }.description { max-width:335px; margin:12px auto 0; color:var(--muted); font-size:13px; line-height:1.75; }.message { color:#65554b; font-family:"Nanum Myeongjo",serif; font-size:15px; line-height:2.15; white-space:pre-line; }.family { display:grid; gap:10px; max-width:320px; margin:28px auto 0; padding-top:21px; border-top:1px solid var(--line); font-family:"Nanum Myeongjo",serif; font-size:14px; }.family small { min-width:48px; color:var(--muted); font-family:inherit; font-size:11px; }
+.gallery-heading { margin:0; color:#c58d83; font-family:var(--script); font-size:clamp(42px,12vw,59px); font-weight:400; letter-spacing:0; line-height:.86; white-space:nowrap; }.photo-story { width:min(100%,500px); margin:19px auto 0; outline:none; touch-action:pan-y; }.photo-story:focus-visible { border-radius:38px; box-shadow:0 0 0 3px rgba(201,137,131,.35); }.photo-story__frame { position:relative; min-height:660px; overflow:hidden; padding:9px; border:1px solid rgba(156,111,96,.24); border-radius:40px 40px 33px 33px; background:#fbf7f2; box-shadow:0 18px 38px rgba(103,74,61,.15),inset 0 0 0 5px rgba(237,216,205,.68); }.photo-story__frame::before { position:absolute; z-index:1; inset:17px; border:1px solid rgba(255,255,255,.72); border-radius:30px 30px 24px 24px; content:""; pointer-events:none; }.photo-story__frame img { width:100%; height:100%; min-height:642px; border-radius:32px 32px 26px 26px; background:#e9ddd5; object-fit:cover; }.photo-story__image--from-right { animation:enterFromRight .56s cubic-bezier(.22,.61,.36,1); }.photo-story__image--from-left { animation:enterFromLeft .56s cubic-bezier(.22,.61,.36,1); }.photo-story__nav { position:absolute; z-index:3; top:50%; width:43px; height:54px; margin:0; padding:0; border:0; color:#fffdf8; background:transparent; font-family:Georgia,serif; font-size:42px; line-height:1; text-shadow:0 2px 9px rgba(48,31,26,.62); transform:translateY(-50%); transition:transform .2s ease,color .2s ease; }.photo-story__nav:hover,.photo-story__nav:focus-visible { color:#f4d6cb; transform:translateY(-50%) scale(1.14); }.photo-story__nav--previous { left:16px; }.photo-story__nav--next { right:16px; }.photo-story__meta { display:grid; grid-template-columns:auto 1fr; align-items:center; gap:13px; margin:17px 7px 0; text-align:left; }.photo-story__count { align-self:start; padding-top:3px; color:var(--rose); font-size:10px; font-weight:800; letter-spacing:.12em; white-space:nowrap; }.photo-story__meta p { margin:0; font-family:"Nanum Myeongjo",serif; font-size:15px; }
+.schedule-card { margin:29px auto 0; padding:21px 16px; border-radius:26px; background:rgba(255,255,255,.72); box-shadow:0 13px 29px rgba(110,80,65,.08); }.schedule-card strong { display:block; font-family:"Nanum Myeongjo",serif; font-size:16px; }.schedule-card p { margin:11px 0 0; color:var(--muted); font-size:13px; line-height:1.7; }.countdown { display:flex; justify-content:center; gap:11px; margin-top:26px; }.countdown div { min-width:58px; }.countdown strong { display:block; font-family:"Nanum Myeongjo",serif; font-size:21px; font-weight:400; }.countdown span { color:var(--muted); font-size:9px; letter-spacing:.08em; }.calendar { margin:22px auto 0; padding:24px 19px 17px; border:1px solid rgba(141,103,91,.15); border-radius:26px; background:rgba(255,255,255,.62); box-shadow:0 13px 29px rgba(110,80,65,.06); }.calendar__month { margin:0 0 20px; color:#765847; font-family:"Nanum Myeongjo",serif; font-size:18.75px; }.calendar__week,.calendar__days { display:grid; grid-template-columns:repeat(7,1fr); }.calendar__week { margin-bottom:8px; color:#aa8b7d; font-size:10.75px; }.calendar__week span:first-child { color:#ca8984; }.calendar__week span:last-child { color:#73908a; }.calendar__day { display:grid; place-items:center; aspect-ratio:1; color:#66544b; font-size:12.75px; }.calendar__day:nth-child(7n + 1) { color:#c47875; }.calendar__day:nth-child(7n) { color:#74908a; }.calendar__day--wedding { width:29px; height:29px; margin:auto; border-radius:50%; color:#fff !important; background:#c98983; box-shadow:0 6px 12px rgba(178,112,108,.24); font-weight:800; }.calendar__note { display:flex; align-items:center; justify-content:center; gap:6px; margin:18px 0 0; color:var(--muted); font-size:11.75px; }.calendar__note span { width:7px; height:7px; border-radius:50%; background:#c98983; }
+.location-address { margin:11px 0 0; color:var(--muted); font-size:13px; }.directions { display:grid; gap:17px; margin-top:27px; text-align:left; }.map-sketch { position:relative; min-height:245px; overflow:hidden; border-radius:22px; background:#f5f5f3; box-shadow:inset 0 0 0 1px rgba(75,80,94,.06); }.map-sketch__road { position:absolute; display:block; background:#fffdfb; box-shadow:0 0 0 2px #5b6276; }.map-sketch__road--vertical { top:25px; bottom:-10px; left:47%; width:30px; }.map-sketch__road--horizontal { top:52%; right:-20px; left:12px; height:26px; }.map-sketch__route { position:absolute; z-index:1; top:35%; left:29%; width:28%; height:27%; border-top:4px solid #4e576d; border-right:4px solid #4e576d; border-bottom:4px solid #4e576d; }.map-sketch__venue,.map-sketch__station,.map-sketch__walk { position:absolute; z-index:2; display:grid; place-items:center; text-align:center; }.map-sketch__venue { top:13%; left:17%; min-width:88px; padding:8px 9px; border-radius:12px; color:#fff; background:#4f596f; font-size:11px; font-weight:800; line-height:1.35; }.map-sketch__station { right:13%; bottom:16%; padding:8px 12px; border-radius:16px; color:#fff; background:#4f596f; font-size:12px; font-weight:800; line-height:1.2; }.map-sketch__station small { margin-top:3px; color:#f7d7ca; font-size:9px; }.map-sketch__walk { right:24%; bottom:43%; color:#4f596f; font-size:10px; font-weight:800; }.transport { display:grid; gap:14px; }.transport article { padding:0 0 14px; border-bottom:1px solid rgba(94,76,66,.13); }.transport article:last-child { padding-bottom:0; border:0; }.transport h3 { margin:0; color:#5b4b43; font-size:13px; }.transport p { margin:7px 0 0; color:#66554c; font-size:12px; line-height:1.7; }.location-actions { display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-top:18px; }.button { display:inline-flex; align-items:center; justify-content:center; min-height:48px; padding:11px 14px; border:1px solid rgba(137,97,82,.3); border-radius:999px; color:#805d50; background:rgba(255,255,255,.55); font-size:13px; font-weight:700; }.button--solid { border:0; color:white; background:#8a6758; box-shadow:0 8px 16px rgba(113,77,59,.16); }
+.accounts { display:grid; gap:10px; margin-top:29px; text-align:left; }.account { overflow:hidden; border:1px solid rgba(169,115,101,.13); border-radius:20px; background:rgba(255,255,255,.78); box-shadow:0 9px 20px rgba(119,82,66,.06); }.account summary { display:flex; align-items:center; justify-content:space-between; padding:18px; list-style:none; cursor:pointer; }.account summary::-webkit-details-marker { display:none; }.account small { display:block; color:var(--rose); font-size:11px; font-weight:800; }.account strong { font-size:14px; }.account summary::after { color:var(--rose); content:"+"; font-family:"Nanum Myeongjo",serif; font-size:22px; }.account[open] summary::after { content:"−"; }.account__inside { padding:0 18px 18px; border-top:1px solid rgba(169,115,101,.1); }.account__inside p { margin:14px 0 10px; color:var(--muted); font-family:"Nanum Myeongjo",serif; font-size:14px; }.account__inside button { padding:0; border:0; color:#9c665d; background:transparent; font-size:12px; font-weight:700; }.guest { display:grid; gap:10px; margin-top:29px; text-align:left; }.guest article { padding:17px; border-radius:17px; background:rgba(255,255,255,.62); box-shadow:0 6px 15px rgba(104,87,66,.05); }.guest header { display:flex; justify-content:space-between; gap:10px; color:var(--muted); font-size:11px; }.guest header strong { color:var(--ink); font-size:13px; }.guest p { margin:10px 0 0; font-size:13px; line-height:1.7; }.footer { padding:34px 25px; color:rgba(255,255,255,.87); background:#6d5549; font-family:"Nanum Myeongjo",serif; font-size:12px; line-height:1.7; text-align:center; }.share-strip { display:flex; align-items:center; justify-content:center; gap:9px; min-height:66px; padding:10px 18px calc(10px + env(safe-area-inset-bottom)); background:#5f493f; }.share-kakao { display:inline-flex; align-items:center; justify-content:center; gap:7px; flex:1; max-width:260px; min-height:39px; border:0; border-radius:999px; color:#3a2c1e; background:#fee500; font-size:11px; font-weight:800; }.talk { display:grid; place-items:center; width:19px; height:16px; border-radius:7px 7px 7px 2px; color:#fee500; background:#3a2c1e; font-size:6px; }.share-copy { min-height:39px; padding:0 14px; border:1px solid rgba(255,255,255,.3); border-radius:999px; color:#fffaf6; background:transparent; font-size:11px; font-weight:700; }
+[data-reveal] { opacity:0; transform:translateY(24px); transition:opacity .7s cubic-bezier(.22,.61,.36,1),transform .7s cubic-bezier(.22,.61,.36,1); } [data-reveal].visible { opacity:1; transform:none; } @keyframes petalFall { 0% { transform:translate3d(0,0,0); opacity:var(--opacity,.42); } 88% { opacity:var(--opacity,.42); } 100% { transform:translate3d(0,108svh,0); opacity:0; } } @keyframes enterFromRight { from { opacity:.22; transform:translateX(36px); } to { opacity:1; transform:none; } } @keyframes enterFromLeft { from { opacity:.22; transform:translateX(-36px); } to { opacity:1; transform:none; } } @media(min-width:560px) { .directions { grid-template-columns:1fr 1.2fr; align-items:start; }.map-sketch { min-height:286px; } } @media(max-width:420px) { .section { padding-right:22px; padding-left:22px; }.photo-story__frame { min-height:560px; }.photo-story__frame img { min-height:542px; }.photo-story__nav { width:35px; font-size:37px; }.photo-story__nav--previous { left:13px; }.photo-story__nav--next { right:13px; } } @media(prefers-reduced-motion:reduce) { *,*::before,*::after { scroll-behavior:auto!important; animation-duration:.01ms!important; transition-duration:.01ms!important; } .petal { animation-duration:var(--d,24s)!important; animation-iteration-count:1!important; } [data-reveal] { opacity:1; transform:none; } }
 
 </style>
   </head>
   <body>
-    <div class="page-shell">
-      <main id="invitation" aria-live="polite">
-        <section class="hero section" id="top"><div class="hero__paper-grain" aria-hidden="true"></div><p class="eyebrow">WEDDING INVITATION</p><h1 class="hero__names" id="heroNames">신랑 이름 <span>&amp;</span> 신부 이름</h1><p class="hero__date" id="heroDate">0000. 00. 00. SAT 00:00</p><div class="hero__photo-wrap floating-photo"><img id="heroImage" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMjAwIiBoZWlnaHQ9IjE1MDAiIHZpZXdCb3g9IjAgMCAxMjAwIDE1MDAiIHJvbGU9ImltZyIgYXJpYS1sYWJlbGxlZGJ5PSJ0aXRsZSBkZXNjIj4KICA8dGl0bGUgaWQ9InRpdGxlIj7sgqzsp4TsnYQg7LaU6rCA7ZW0IOyjvOyEuOyalDwvdGl0bGU+CiAgPGRlc2MgaWQ9ImRlc2MiPuuqqOuwlOydvCDssq3ssqnsnqUg7IKs7KeEIOyekOumrCDtkZzsi5zsnpA8L2Rlc2M+CiAgPGRlZnM+CiAgICA8bGluZWFyR3JhZGllbnQgaWQ9ImJnIiB4MT0iMCIgeTE9IjAiIHgyPSIxIiB5Mj0iMSI+PHN0b3Agc3RvcC1jb2xvcj0iI2Q4YzhiYiIvPjxzdG9wIG9mZnNldD0iLjUiIHN0b3AtY29sb3I9IiNmNGVlZTgiLz48c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiNiYmM1YjgiLz48L2xpbmVhckdyYWRpZW50PgogICAgPGZpbHRlciBpZD0iYmx1ciI+PGZlR2F1c3NpYW5CbHVyIHN0ZERldmlhdGlvbj0iMTIiLz48L2ZpbHRlcj4KICA8L2RlZnM+CiAgPHJlY3Qgd2lkdGg9IjEyMDAiIGhlaWdodD0iMTUwMCIgZmlsbD0idXJsKCNiZykiLz4KICA8Y2lyY2xlIGN4PSIxNzAiIGN5PSIyNTAiIHI9IjIwMCIgZmlsbD0iI2Y3ZTVkNyIgb3BhY2l0eT0iLjciIGZpbHRlcj0idXJsKCNibHVyKSIvPgogIDxjaXJjbGUgY3g9Ijk1MCIgY3k9IjExMzAiIHI9IjMwMCIgZmlsbD0iIzkxYTY4ZCIgb3BhY2l0eT0iLjM1IiBmaWx0ZXI9InVybCgjYmx1cikiLz4KICA8ZyBmaWxsPSJub25lIiBzdHJva2U9IiNmZmZhZjUiIHN0cm9rZS13aWR0aD0iNCIgb3BhY2l0eT0iLjgiPjxwYXRoIGQ9Ik0zMjAgNjYwYzE0MC0yMTAgNDIwLTE5MCA1NTAgMTUiLz48cGF0aCBkPSJNMzUwIDcwMGMxMzAgMTYwIDM2MCAxNzAgNTAwIDAiLz48L2c+CiAgPHRleHQgeD0iNjAwIiB5PSI3NjAiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9IiM0YjU1NDkiIGZvbnQtZmFtaWx5PSJzZXJpZiIgZm9udC1zaXplPSIzOCIgbGV0dGVyLXNwYWNpbmc9IjUiPllPVVIgUEhPVE88L3RleHQ+CiAgPHRleHQgeD0iNjAwIiB5PSI4MTUiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9IiM0YjU1NDkiIGZvbnQtZmFtaWx5PSJzYW5zLXNlcmlmIiBmb250LXNpemU9IjIwIiBsZXR0ZXItc3BhY2luZz0iMiI+YXNzZXRzL3Bob3RvcyDtj7TrjZTsl5Ag7IKs7KeE7J2EIOuEo+qzoCDshKTsoJUg7YyM7J2866eMIOuwlOq/lCDso7zshLjsmpQ8L3RleHQ+Cjwvc3ZnPgo=" alt="두 사람의 사진" /></div><a href="#invitation-message" class="scroll-cue" aria-label="초대 글로 이동"><span></span></a></section>
-        <section class="message section section--cream" id="invitation-message"><p class="eyebrow">INVITATION</p><h2 class="section-title">소중한 분들을 초대합니다</h2><p class="message__body" id="invitationText"></p><div class="parents" id="parents"></div></section>
-        <section class="moments section section--sage" id="moments"><p class="eyebrow">OUR MOMENTS</p><h2 class="section-title">함께 쌓아갈 장면들</h2><div class="moments__collage" id="momentCollage"></div></section>
-        <section class="calendar section" id="schedule"><p class="eyebrow">THE DAY</p><h2 class="section-title" id="scheduleTitle"></h2><div class="calendar-card" aria-label="결혼식 달력"><div class="calendar-card__head"><button type="button" id="calendarPrevious" aria-label="이전 달" disabled>‹</button><strong id="calendarMonth"></strong><button type="button" id="calendarNext" aria-label="다음 달" disabled>›</button></div><div class="calendar-grid calendar-grid--days" aria-hidden="true"><span>일</span><span>월</span><span>화</span><span>수</span><span>목</span><span>금</span><span>토</span></div><div class="calendar-grid" id="calendarDays"></div></div><div class="countdown" id="countdown" aria-label="결혼식까지 남은 시간"></div></section>
-        <section class="gallery section" id="gallery"><p class="eyebrow">GALLERY</p><h2 class="section-title">두 사람의 순간</h2><p class="section-description">사진을 누르면 크게 보실 수 있습니다.</p><div class="gallery-grid" id="galleryGrid"></div><button class="button button--outline gallery__more" id="galleryMore" type="button" hidden>사진 더 보기</button></section>
-        <section class="location section section--cream" id="location"><p class="eyebrow">LOCATION</p><h2 class="section-title" id="venueName"></h2><p class="location__address" id="venueAddress"></p><div class="map-card" id="mapCard" role="img" aria-label="예식장 위치 안내"><div class="map-card__pin" aria-hidden="true">♥</div><p id="mapPlaceName"></p></div><div class="location__buttons"><a class="button button--dark" id="mapLink" target="_blank" rel="noopener noreferrer">지도 보기</a><button class="button button--outline" id="copyAddress" type="button">주소 복사</button></div><div class="transport" id="transport"></div></section>
-        <section class="accounts section" id="accounts"><p class="eyebrow">GIFT</p><h2 class="section-title">마음 전하실 곳</h2><p class="section-description">참석이 어려우신 분들을 위해 계좌번호를 안내드립니다.</p><div class="accounts__list" id="accountsList"></div></section>
-        <section class="guestbook section section--sage" id="guestbook"><p class="eyebrow">GUESTBOOK</p><h2 class="section-title">따뜻한 마음을 남겨주세요</h2><p class="section-description">작성된 글은 확인 후 공개됩니다.</p><form class="guestbook-form" id="guestbookForm" method="post" target="guestbookFrame" novalidate><input type="hidden" name="formToken" id="formToken" /><input type="hidden" name="page" id="guestbookPage" /><div class="honeypot" aria-hidden="true"><label>Website <input name="website" tabindex="-1" autocomplete="off" /></label></div><label>이름<input name="name" id="guestName" maxlength="20" autocomplete="name" required placeholder="이름을 입력해 주세요" /></label><label>축하 메시지<textarea name="message" id="guestMessage" maxlength="300" required placeholder="두 사람에게 축하의 말을 남겨주세요"></textarea></label><div id="turnstileContainer" class="turnstile"></div><button class="button button--dark" id="guestbookSubmit" type="submit">축하 글 남기기</button><p class="form-message" id="guestbookStatus" role="status"></p></form><iframe name="guestbookFrame" id="guestbookFrame" title="방명록 전송 결과" hidden></iframe><div class="guestbook-list" id="guestbookList"></div></section>
-      </main>
-      <footer class="footer" id="footer"></footer>
-    </div>
-    <dialog class="lightbox" id="lightbox" aria-label="사진 크게 보기"><button type="button" class="lightbox__close" id="lightboxClose" aria-label="닫기">×</button><button type="button" class="lightbox__nav lightbox__nav--prev" id="lightboxPrevious" aria-label="이전 사진">‹</button><figure><img id="lightboxImage" alt="" /><figcaption id="lightboxCaption"></figcaption></figure><button type="button" class="lightbox__nav lightbox__nav--next" id="lightboxNext" aria-label="다음 사진">›</button></dialog>
-    <div class="toast" id="toast" role="status" aria-live="polite"></div>
-    <script id="embeddedInvitationConfig" type="application/json">
-      {"siteTitle":"신랑 이름 ♥ 신부 이름 | 모바일 청첩장","heroAlt":"두 사람의 대표 사진","groom":{"name":"신랑 이름","father":"아버지 성함","mother":"어머니 성함"},"bride":{"name":"신부 이름","father":"아버지 성함","mother":"어머니 성함"},"date":"2027-10-23T14:00:00+09:00","dateDisplay":"2027년 10월 23일 토요일 오후 2시","invitation":"서로의 평범한 하루를 특별하게 만들어 온 두 사람이\n이제 같은 곳을 바라보며 새로운 시작을 하려 합니다.\n\n귀한 걸음으로 함께해 주셔서\n저희의 첫 페이지를 축복해 주세요.","heroImage":"data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMjAwIiBoZWlnaHQ9IjE1MDAiIHZpZXdCb3g9IjAgMCAxMjAwIDE1MDAiIHJvbGU9ImltZyIgYXJpYS1sYWJlbGxlZGJ5PSJ0aXRsZSBkZXNjIj4KICA8dGl0bGUgaWQ9InRpdGxlIj7sgqzsp4TsnYQg7LaU6rCA7ZW0IOyjvOyEuOyalDwvdGl0bGU+CiAgPGRlc2MgaWQ9ImRlc2MiPuuqqOuwlOydvCDssq3ssqnsnqUg7IKs7KeEIOyekOumrCDtkZzsi5zsnpA8L2Rlc2M+CiAgPGRlZnM+CiAgICA8bGluZWFyR3JhZGllbnQgaWQ9ImJnIiB4MT0iMCIgeTE9IjAiIHgyPSIxIiB5Mj0iMSI+PHN0b3Agc3RvcC1jb2xvcj0iI2Q4YzhiYiIvPjxzdG9wIG9mZnNldD0iLjUiIHN0b3AtY29sb3I9IiNmNGVlZTgiLz48c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiNiYmM1YjgiLz48L2xpbmVhckdyYWRpZW50PgogICAgPGZpbHRlciBpZD0iYmx1ciI+PGZlR2F1c3NpYW5CbHVyIHN0ZERldmlhdGlvbj0iMTIiLz48L2ZpbHRlcj4KICA8L2RlZnM+CiAgPHJlY3Qgd2lkdGg9IjEyMDAiIGhlaWdodD0iMTUwMCIgZmlsbD0idXJsKCNiZykiLz4KICA8Y2lyY2xlIGN4PSIxNzAiIGN5PSIyNTAiIHI9IjIwMCIgZmlsbD0iI2Y3ZTVkNyIgb3BhY2l0eT0iLjciIGZpbHRlcj0idXJsKCNibHVyKSIvPgogIDxjaXJjbGUgY3g9Ijk1MCIgY3k9IjExMzAiIHI9IjMwMCIgZmlsbD0iIzkxYTY4ZCIgb3BhY2l0eT0iLjM1IiBmaWx0ZXI9InVybCgjYmx1cikiLz4KICA8ZyBmaWxsPSJub25lIiBzdHJva2U9IiNmZmZhZjUiIHN0cm9rZS13aWR0aD0iNCIgb3BhY2l0eT0iLjgiPjxwYXRoIGQ9Ik0zMjAgNjYwYzE0MC0yMTAgNDIwLTE5MCA1NTAgMTUiLz48cGF0aCBkPSJNMzUwIDcwMGMxMzAgMTYwIDM2MCAxNzAgNTAwIDAiLz48L2c+CiAgPHRleHQgeD0iNjAwIiB5PSI3NjAiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9IiM0YjU1NDkiIGZvbnQtZmFtaWx5PSJzZXJpZiIgZm9udC1zaXplPSIzOCIgbGV0dGVyLXNwYWNpbmc9IjUiPllPVVIgUEhPVE88L3RleHQ+CiAgPHRleHQgeD0iNjAwIiB5PSI4MTUiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9IiM0YjU1NDkiIGZvbnQtZmFtaWx5PSJzYW5zLXNlcmlmIiBmb250LXNpemU9IjIwIiBsZXR0ZXItc3BhY2luZz0iMiI+YXNzZXRzL3Bob3RvcyDtj7TrjZTsl5Ag7IKs7KeE7J2EIOuEo+qzoCDshKTsoJUg7YyM7J2866eMIOuwlOq/lCDso7zshLjsmpQ8L3RleHQ+Cjwvc3ZnPgo=","momentPhotos":[{"src":"data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMjAwIiBoZWlnaHQ9IjE1MDAiIHZpZXdCb3g9IjAgMCAxMjAwIDE1MDAiIHJvbGU9ImltZyIgYXJpYS1sYWJlbGxlZGJ5PSJ0aXRsZSBkZXNjIj4KICA8dGl0bGUgaWQ9InRpdGxlIj7sgqzsp4TsnYQg7LaU6rCA7ZW0IOyjvOyEuOyalDwvdGl0bGU+CiAgPGRlc2MgaWQ9ImRlc2MiPuuqqOuwlOydvCDssq3ssqnsnqUg7IKs7KeEIOyekOumrCDtkZzsi5zsnpA8L2Rlc2M+CiAgPGRlZnM+CiAgICA8bGluZWFyR3JhZGllbnQgaWQ9ImJnIiB4MT0iMCIgeTE9IjAiIHgyPSIxIiB5Mj0iMSI+PHN0b3Agc3RvcC1jb2xvcj0iI2Q4YzhiYiIvPjxzdG9wIG9mZnNldD0iLjUiIHN0b3AtY29sb3I9IiNmNGVlZTgiLz48c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiNiYmM1YjgiLz48L2xpbmVhckdyYWRpZW50PgogICAgPGZpbHRlciBpZD0iYmx1ciI+PGZlR2F1c3NpYW5CbHVyIHN0ZERldmlhdGlvbj0iMTIiLz48L2ZpbHRlcj4KICA8L2RlZnM+CiAgPHJlY3Qgd2lkdGg9IjEyMDAiIGhlaWdodD0iMTUwMCIgZmlsbD0idXJsKCNiZykiLz4KICA8Y2lyY2xlIGN4PSIxNzAiIGN5PSIyNTAiIHI9IjIwMCIgZmlsbD0iI2Y3ZTVkNyIgb3BhY2l0eT0iLjciIGZpbHRlcj0idXJsKCNibHVyKSIvPgogIDxjaXJjbGUgY3g9Ijk1MCIgY3k9IjExMzAiIHI9IjMwMCIgZmlsbD0iIzkxYTY4ZCIgb3BhY2l0eT0iLjM1IiBmaWx0ZXI9InVybCgjYmx1cikiLz4KICA8ZyBmaWxsPSJub25lIiBzdHJva2U9IiNmZmZhZjUiIHN0cm9rZS13aWR0aD0iNCIgb3BhY2l0eT0iLjgiPjxwYXRoIGQ9Ik0zMjAgNjYwYzE0MC0yMTAgNDIwLTE5MCA1NTAgMTUiLz48cGF0aCBkPSJNMzUwIDcwMGMxMzAgMTYwIDM2MCAxNzAgNTAwIDAiLz48L2c+CiAgPHRleHQgeD0iNjAwIiB5PSI3NjAiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9IiM0YjU1NDkiIGZvbnQtZmFtaWx5PSJzZXJpZiIgZm9udC1zaXplPSIzOCIgbGV0dGVyLXNwYWNpbmc9IjUiPllPVVIgUEhPVE88L3RleHQ+CiAgPHRleHQgeD0iNjAwIiB5PSI4MTUiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9IiM0YjU1NDkiIGZvbnQtZmFtaWx5PSJzYW5zLXNlcmlmIiBmb250LXNpemU9IjIwIiBsZXR0ZXItc3BhY2luZz0iMiI+YXNzZXRzL3Bob3RvcyDtj7TrjZTsl5Ag7IKs7KeE7J2EIOuEo+qzoCDshKTsoJUg7YyM7J2866eMIOuwlOq/lCDso7zshLjsmpQ8L3RleHQ+Cjwvc3ZnPgo=","alt":"두 사람의 사진 1"},{"src":"data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMjAwIiBoZWlnaHQ9IjE1MDAiIHZpZXdCb3g9IjAgMCAxMjAwIDE1MDAiIHJvbGU9ImltZyIgYXJpYS1sYWJlbGxlZGJ5PSJ0aXRsZSBkZXNjIj4KICA8dGl0bGUgaWQ9InRpdGxlIj7sgqzsp4TsnYQg7LaU6rCA7ZW0IOyjvOyEuOyalDwvdGl0bGU+CiAgPGRlc2MgaWQ9ImRlc2MiPuuqqOuwlOydvCDssq3ssqnsnqUg7IKs7KeEIOyekOumrCDtkZzsi5zsnpA8L2Rlc2M+CiAgPGRlZnM+CiAgICA8bGluZWFyR3JhZGllbnQgaWQ9ImJnIiB4MT0iMCIgeTE9IjAiIHgyPSIxIiB5Mj0iMSI+PHN0b3Agc3RvcC1jb2xvcj0iI2Q4YzhiYiIvPjxzdG9wIG9mZnNldD0iLjUiIHN0b3AtY29sb3I9IiNmNGVlZTgiLz48c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiNiYmM1YjgiLz48L2xpbmVhckdyYWRpZW50PgogICAgPGZpbHRlciBpZD0iYmx1ciI+PGZlR2F1c3NpYW5CbHVyIHN0ZERldmlhdGlvbj0iMTIiLz48L2ZpbHRlcj4KICA8L2RlZnM+CiAgPHJlY3Qgd2lkdGg9IjEyMDAiIGhlaWdodD0iMTUwMCIgZmlsbD0idXJsKCNiZykiLz4KICA8Y2lyY2xlIGN4PSIxNzAiIGN5PSIyNTAiIHI9IjIwMCIgZmlsbD0iI2Y3ZTVkNyIgb3BhY2l0eT0iLjciIGZpbHRlcj0idXJsKCNibHVyKSIvPgogIDxjaXJjbGUgY3g9Ijk1MCIgY3k9IjExMzAiIHI9IjMwMCIgZmlsbD0iIzkxYTY4ZCIgb3BhY2l0eT0iLjM1IiBmaWx0ZXI9InVybCgjYmx1cikiLz4KICA8ZyBmaWxsPSJub25lIiBzdHJva2U9IiNmZmZhZjUiIHN0cm9rZS13aWR0aD0iNCIgb3BhY2l0eT0iLjgiPjxwYXRoIGQ9Ik0zMjAgNjYwYzE0MC0yMTAgNDIwLTE5MCA1NTAgMTUiLz48cGF0aCBkPSJNMzUwIDcwMGMxMzAgMTYwIDM2MCAxNzAgNTAwIDAiLz48L2c+CiAgPHRleHQgeD0iNjAwIiB5PSI3NjAiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9IiM0YjU1NDkiIGZvbnQtZmFtaWx5PSJzZXJpZiIgZm9udC1zaXplPSIzOCIgbGV0dGVyLXNwYWNpbmc9IjUiPllPVVIgUEhPVE88L3RleHQ+CiAgPHRleHQgeD0iNjAwIiB5PSI4MTUiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9IiM0YjU1NDkiIGZvbnQtZmFtaWx5PSJzYW5zLXNlcmlmIiBmb250LXNpemU9IjIwIiBsZXR0ZXItc3BhY2luZz0iMiI+YXNzZXRzL3Bob3RvcyDtj7TrjZTsl5Ag7IKs7KeE7J2EIOuEo+qzoCDshKTsoJUg7YyM7J2866eMIOuwlOq/lCDso7zshLjsmpQ8L3RleHQ+Cjwvc3ZnPgo=","alt":"두 사람의 사진 2"},{"src":"data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMjAwIiBoZWlnaHQ9IjE1MDAiIHZpZXdCb3g9IjAgMCAxMjAwIDE1MDAiIHJvbGU9ImltZyIgYXJpYS1sYWJlbGxlZGJ5PSJ0aXRsZSBkZXNjIj4KICA8dGl0bGUgaWQ9InRpdGxlIj7sgqzsp4TsnYQg7LaU6rCA7ZW0IOyjvOyEuOyalDwvdGl0bGU+CiAgPGRlc2MgaWQ9ImRlc2MiPuuqqOuwlOydvCDssq3ssqnsnqUg7IKs7KeEIOyekOumrCDtkZzsi5zsnpA8L2Rlc2M+CiAgPGRlZnM+CiAgICA8bGluZWFyR3JhZGllbnQgaWQ9ImJnIiB4MT0iMCIgeTE9IjAiIHgyPSIxIiB5Mj0iMSI+PHN0b3Agc3RvcC1jb2xvcj0iI2Q4YzhiYiIvPjxzdG9wIG9mZnNldD0iLjUiIHN0b3AtY29sb3I9IiNmNGVlZTgiLz48c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiNiYmM1YjgiLz48L2xpbmVhckdyYWRpZW50PgogICAgPGZpbHRlciBpZD0iYmx1ciI+PGZlR2F1c3NpYW5CbHVyIHN0ZERldmlhdGlvbj0iMTIiLz48L2ZpbHRlcj4KICA8L2RlZnM+CiAgPHJlY3Qgd2lkdGg9IjEyMDAiIGhlaWdodD0iMTUwMCIgZmlsbD0idXJsKCNiZykiLz4KICA8Y2lyY2xlIGN4PSIxNzAiIGN5PSIyNTAiIHI9IjIwMCIgZmlsbD0iI2Y3ZTVkNyIgb3BhY2l0eT0iLjciIGZpbHRlcj0idXJsKCNibHVyKSIvPgogIDxjaXJjbGUgY3g9Ijk1MCIgY3k9IjExMzAiIHI9IjMwMCIgZmlsbD0iIzkxYTY4ZCIgb3BhY2l0eT0iLjM1IiBmaWx0ZXI9InVybCgjYmx1cikiLz4KICA8ZyBmaWxsPSJub25lIiBzdHJva2U9IiNmZmZhZjUiIHN0cm9rZS13aWR0aD0iNCIgb3BhY2l0eT0iLjgiPjxwYXRoIGQ9Ik0zMjAgNjYwYzE0MC0yMTAgNDIwLTE5MCA1NTAgMTUiLz48cGF0aCBkPSJNMzUwIDcwMGMxMzAgMTYwIDM2MCAxNzAgNTAwIDAiLz48L2c+CiAgPHRleHQgeD0iNjAwIiB5PSI3NjAiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9IiM0YjU1NDkiIGZvbnQtZmFtaWx5PSJzZXJpZiIgZm9udC1zaXplPSIzOCIgbGV0dGVyLXNwYWNpbmc9IjUiPllPVVIgUEhPVE88L3RleHQ+CiAgPHRleHQgeD0iNjAwIiB5PSI4MTUiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9IiM0YjU1NDkiIGZvbnQtZmFtaWx5PSJzYW5zLXNlcmlmIiBmb250LXNpemU9IjIwIiBsZXR0ZXItc3BhY2luZz0iMiI+YXNzZXRzL3Bob3RvcyDtj7TrjZTsl5Ag7IKs7KeE7J2EIOuEo+qzoCDshKTsoJUg7YyM7J2866eMIOuwlOq/lCDso7zshLjsmpQ8L3RleHQ+Cjwvc3ZnPgo=","alt":"두 사람의 사진 3"}],"gallery":[{"src":"data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMjAwIiBoZWlnaHQ9IjE1MDAiIHZpZXdCb3g9IjAgMCAxMjAwIDE1MDAiIHJvbGU9ImltZyIgYXJpYS1sYWJlbGxlZGJ5PSJ0aXRsZSBkZXNjIj4KICA8dGl0bGUgaWQ9InRpdGxlIj7sgqzsp4TsnYQg7LaU6rCA7ZW0IOyjvOyEuOyalDwvdGl0bGU+CiAgPGRlc2MgaWQ9ImRlc2MiPuuqqOuwlOydvCDssq3ssqnsnqUg7IKs7KeEIOyekOumrCDtkZzsi5zsnpA8L2Rlc2M+CiAgPGRlZnM+CiAgICA8bGluZWFyR3JhZGllbnQgaWQ9ImJnIiB4MT0iMCIgeTE9IjAiIHgyPSIxIiB5Mj0iMSI+PHN0b3Agc3RvcC1jb2xvcj0iI2Q4YzhiYiIvPjxzdG9wIG9mZnNldD0iLjUiIHN0b3AtY29sb3I9IiNmNGVlZTgiLz48c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiNiYmM1YjgiLz48L2xpbmVhckdyYWRpZW50PgogICAgPGZpbHRlciBpZD0iYmx1ciI+PGZlR2F1c3NpYW5CbHVyIHN0ZERldmlhdGlvbj0iMTIiLz48L2ZpbHRlcj4KICA8L2RlZnM+CiAgPHJlY3Qgd2lkdGg9IjEyMDAiIGhlaWdodD0iMTUwMCIgZmlsbD0idXJsKCNiZykiLz4KICA8Y2lyY2xlIGN4PSIxNzAiIGN5PSIyNTAiIHI9IjIwMCIgZmlsbD0iI2Y3ZTVkNyIgb3BhY2l0eT0iLjciIGZpbHRlcj0idXJsKCNibHVyKSIvPgogIDxjaXJjbGUgY3g9Ijk1MCIgY3k9IjExMzAiIHI9IjMwMCIgZmlsbD0iIzkxYTY4ZCIgb3BhY2l0eT0iLjM1IiBmaWx0ZXI9InVybCgjYmx1cikiLz4KICA8ZyBmaWxsPSJub25lIiBzdHJva2U9IiNmZmZhZjUiIHN0cm9rZS13aWR0aD0iNCIgb3BhY2l0eT0iLjgiPjxwYXRoIGQ9Ik0zMjAgNjYwYzE0MC0yMTAgNDIwLTE5MCA1NTAgMTUiLz48cGF0aCBkPSJNMzUwIDcwMGMxMzAgMTYwIDM2MCAxNzAgNTAwIDAiLz48L2c+CiAgPHRleHQgeD0iNjAwIiB5PSI3NjAiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9IiM0YjU1NDkiIGZvbnQtZmFtaWx5PSJzZXJpZiIgZm9udC1zaXplPSIzOCIgbGV0dGVyLXNwYWNpbmc9IjUiPllPVVIgUEhPVE88L3RleHQ+CiAgPHRleHQgeD0iNjAwIiB5PSI4MTUiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9IiM0YjU1NDkiIGZvbnQtZmFtaWx5PSJzYW5zLXNlcmlmIiBmb250LXNpemU9IjIwIiBsZXR0ZXItc3BhY2luZz0iMiI+YXNzZXRzL3Bob3RvcyDtj7TrjZTsl5Ag7IKs7KeE7J2EIOuEo+qzoCDshKTsoJUg7YyM7J2866eMIOuwlOq/lCDso7zshLjsmpQ8L3RleHQ+Cjwvc3ZnPgo=","alt":"두 사람의 사진 1","caption":"우리의 첫 번째 장면"},{"src":"data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMjAwIiBoZWlnaHQ9IjE1MDAiIHZpZXdCb3g9IjAgMCAxMjAwIDE1MDAiIHJvbGU9ImltZyIgYXJpYS1sYWJlbGxlZGJ5PSJ0aXRsZSBkZXNjIj4KICA8dGl0bGUgaWQ9InRpdGxlIj7sgqzsp4TsnYQg7LaU6rCA7ZW0IOyjvOyEuOyalDwvdGl0bGU+CiAgPGRlc2MgaWQ9ImRlc2MiPuuqqOuwlOydvCDssq3ssqnsnqUg7IKs7KeEIOyekOumrCDtkZzsi5zsnpA8L2Rlc2M+CiAgPGRlZnM+CiAgICA8bGluZWFyR3JhZGllbnQgaWQ9ImJnIiB4MT0iMCIgeTE9IjAiIHgyPSIxIiB5Mj0iMSI+PHN0b3Agc3RvcC1jb2xvcj0iI2Q4YzhiYiIvPjxzdG9wIG9mZnNldD0iLjUiIHN0b3AtY29sb3I9IiNmNGVlZTgiLz48c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiNiYmM1YjgiLz48L2xpbmVhckdyYWRpZW50PgogICAgPGZpbHRlciBpZD0iYmx1ciI+PGZlR2F1c3NpYW5CbHVyIHN0ZERldmlhdGlvbj0iMTIiLz48L2ZpbHRlcj4KICA8L2RlZnM+CiAgPHJlY3Qgd2lkdGg9IjEyMDAiIGhlaWdodD0iMTUwMCIgZmlsbD0idXJsKCNiZykiLz4KICA8Y2lyY2xlIGN4PSIxNzAiIGN5PSIyNTAiIHI9IjIwMCIgZmlsbD0iI2Y3ZTVkNyIgb3BhY2l0eT0iLjciIGZpbHRlcj0idXJsKCNibHVyKSIvPgogIDxjaXJjbGUgY3g9Ijk1MCIgY3k9IjExMzAiIHI9IjMwMCIgZmlsbD0iIzkxYTY4ZCIgb3BhY2l0eT0iLjM1IiBmaWx0ZXI9InVybCgjYmx1cikiLz4KICA8ZyBmaWxsPSJub25lIiBzdHJva2U9IiNmZmZhZjUiIHN0cm9rZS13aWR0aD0iNCIgb3BhY2l0eT0iLjgiPjxwYXRoIGQ9Ik0zMjAgNjYwYzE0MC0yMTAgNDIwLTE5MCA1NTAgMTUiLz48cGF0aCBkPSJNMzUwIDcwMGMxMzAgMTYwIDM2MCAxNzAgNTAwIDAiLz48L2c+CiAgPHRleHQgeD0iNjAwIiB5PSI3NjAiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9IiM0YjU1NDkiIGZvbnQtZmFtaWx5PSJzZXJpZiIgZm9udC1zaXplPSIzOCIgbGV0dGVyLXNwYWNpbmc9IjUiPllPVVIgUEhPVE88L3RleHQ+CiAgPHRleHQgeD0iNjAwIiB5PSI4MTUiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9IiM0YjU1NDkiIGZvbnQtZmFtaWx5PSJzYW5zLXNlcmlmIiBmb250LXNpemU9IjIwIiBsZXR0ZXItc3BhY2luZz0iMiI+YXNzZXRzL3Bob3RvcyDtj7TrjZTsl5Ag7IKs7KeE7J2EIOuEo+qzoCDshKTsoJUg7YyM7J2866eMIOuwlOq/lCDso7zshLjsmpQ8L3RleHQ+Cjwvc3ZnPgo=","alt":"두 사람의 사진 2","caption":"마주 보는 시간"},{"src":"data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMjAwIiBoZWlnaHQ9IjE1MDAiIHZpZXdCb3g9IjAgMCAxMjAwIDE1MDAiIHJvbGU9ImltZyIgYXJpYS1sYWJlbGxlZGJ5PSJ0aXRsZSBkZXNjIj4KICA8dGl0bGUgaWQ9InRpdGxlIj7sgqzsp4TsnYQg7LaU6rCA7ZW0IOyjvOyEuOyalDwvdGl0bGU+CiAgPGRlc2MgaWQ9ImRlc2MiPuuqqOuwlOydvCDssq3ssqnsnqUg7IKs7KeEIOyekOumrCDtkZzsi5zsnpA8L2Rlc2M+CiAgPGRlZnM+CiAgICA8bGluZWFyR3JhZGllbnQgaWQ9ImJnIiB4MT0iMCIgeTE9IjAiIHgyPSIxIiB5Mj0iMSI+PHN0b3Agc3RvcC1jb2xvcj0iI2Q4YzhiYiIvPjxzdG9wIG9mZnNldD0iLjUiIHN0b3AtY29sb3I9IiNmNGVlZTgiLz48c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiNiYmM1YjgiLz48L2xpbmVhckdyYWRpZW50PgogICAgPGZpbHRlciBpZD0iYmx1ciI+PGZlR2F1c3NpYW5CbHVyIHN0ZERldmlhdGlvbj0iMTIiLz48L2ZpbHRlcj4KICA8L2RlZnM+CiAgPHJlY3Qgd2lkdGg9IjEyMDAiIGhlaWdodD0iMTUwMCIgZmlsbD0idXJsKCNiZykiLz4KICA8Y2lyY2xlIGN4PSIxNzAiIGN5PSIyNTAiIHI9IjIwMCIgZmlsbD0iI2Y3ZTVkNyIgb3BhY2l0eT0iLjciIGZpbHRlcj0idXJsKCNibHVyKSIvPgogIDxjaXJjbGUgY3g9Ijk1MCIgY3k9IjExMzAiIHI9IjMwMCIgZmlsbD0iIzkxYTY4ZCIgb3BhY2l0eT0iLjM1IiBmaWx0ZXI9InVybCgjYmx1cikiLz4KICA8ZyBmaWxsPSJub25lIiBzdHJva2U9IiNmZmZhZjUiIHN0cm9rZS13aWR0aD0iNCIgb3BhY2l0eT0iLjgiPjxwYXRoIGQ9Ik0zMjAgNjYwYzE0MC0yMTAgNDIwLTE5MCA1NTAgMTUiLz48cGF0aCBkPSJNMzUwIDcwMGMxMzAgMTYwIDM2MCAxNzAgNTAwIDAiLz48L2c+CiAgPHRleHQgeD0iNjAwIiB5PSI3NjAiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9IiM0YjU1NDkiIGZvbnQtZmFtaWx5PSJzZXJpZiIgZm9udC1zaXplPSIzOCIgbGV0dGVyLXNwYWNpbmc9IjUiPllPVVIgUEhPVE88L3RleHQ+CiAgPHRleHQgeD0iNjAwIiB5PSI4MTUiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9IiM0YjU1NDkiIGZvbnQtZmFtaWx5PSJzYW5zLXNlcmlmIiBmb250LXNpemU9IjIwIiBsZXR0ZXItc3BhY2luZz0iMiI+YXNzZXRzL3Bob3RvcyDtj7TrjZTsl5Ag7IKs7KeE7J2EIOuEo+qzoCDshKTsoJUg7YyM7J2866eMIOuwlOq/lCDso7zshLjsmpQ8L3RleHQ+Cjwvc3ZnPgo=","alt":"두 사람의 사진 3","caption":"빛나던 하루"},{"src":"data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMjAwIiBoZWlnaHQ9IjE1MDAiIHZpZXdCb3g9IjAgMCAxMjAwIDE1MDAiIHJvbGU9ImltZyIgYXJpYS1sYWJlbGxlZGJ5PSJ0aXRsZSBkZXNjIj4KICA8dGl0bGUgaWQ9InRpdGxlIj7sgqzsp4TsnYQg7LaU6rCA7ZW0IOyjvOyEuOyalDwvdGl0bGU+CiAgPGRlc2MgaWQ9ImRlc2MiPuuqqOuwlOydvCDssq3ssqnsnqUg7IKs7KeEIOyekOumrCDtkZzsi5zsnpA8L2Rlc2M+CiAgPGRlZnM+CiAgICA8bGluZWFyR3JhZGllbnQgaWQ9ImJnIiB4MT0iMCIgeTE9IjAiIHgyPSIxIiB5Mj0iMSI+PHN0b3Agc3RvcC1jb2xvcj0iI2Q4YzhiYiIvPjxzdG9wIG9mZnNldD0iLjUiIHN0b3AtY29sb3I9IiNmNGVlZTgiLz48c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiNiYmM1YjgiLz48L2xpbmVhckdyYWRpZW50PgogICAgPGZpbHRlciBpZD0iYmx1ciI+PGZlR2F1c3NpYW5CbHVyIHN0ZERldmlhdGlvbj0iMTIiLz48L2ZpbHRlcj4KICA8L2RlZnM+CiAgPHJlY3Qgd2lkdGg9IjEyMDAiIGhlaWdodD0iMTUwMCIgZmlsbD0idXJsKCNiZykiLz4KICA8Y2lyY2xlIGN4PSIxNzAiIGN5PSIyNTAiIHI9IjIwMCIgZmlsbD0iI2Y3ZTVkNyIgb3BhY2l0eT0iLjciIGZpbHRlcj0idXJsKCNibHVyKSIvPgogIDxjaXJjbGUgY3g9Ijk1MCIgY3k9IjExMzAiIHI9IjMwMCIgZmlsbD0iIzkxYTY4ZCIgb3BhY2l0eT0iLjM1IiBmaWx0ZXI9InVybCgjYmx1cikiLz4KICA8ZyBmaWxsPSJub25lIiBzdHJva2U9IiNmZmZhZjUiIHN0cm9rZS13aWR0aD0iNCIgb3BhY2l0eT0iLjgiPjxwYXRoIGQ9Ik0zMjAgNjYwYzE0MC0yMTAgNDIwLTE5MCA1NTAgMTUiLz48cGF0aCBkPSJNMzUwIDcwMGMxMzAgMTYwIDM2MCAxNzAgNTAwIDAiLz48L2c+CiAgPHRleHQgeD0iNjAwIiB5PSI3NjAiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9IiM0YjU1NDkiIGZvbnQtZmFtaWx5PSJzZXJpZiIgZm9udC1zaXplPSIzOCIgbGV0dGVyLXNwYWNpbmc9IjUiPllPVVIgUEhPVE88L3RleHQ+CiAgPHRleHQgeD0iNjAwIiB5PSI4MTUiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9IiM0YjU1NDkiIGZvbnQtZmFtaWx5PSJzYW5zLXNlcmlmIiBmb250LXNpemU9IjIwIiBsZXR0ZXItc3BhY2luZz0iMiI+YXNzZXRzL3Bob3RvcyDtj7TrjZTsl5Ag7IKs7KeE7J2EIOuEo+qzoCDshKTsoJUg7YyM7J2866eMIOuwlOq/lCDso7zshLjsmpQ8L3RleHQ+Cjwvc3ZnPgo=","alt":"두 사람의 사진 4","caption":"같이 걷는 길"},{"src":"data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMjAwIiBoZWlnaHQ9IjE1MDAiIHZpZXdCb3g9IjAgMCAxMjAwIDE1MDAiIHJvbGU9ImltZyIgYXJpYS1sYWJlbGxlZGJ5PSJ0aXRsZSBkZXNjIj4KICA8dGl0bGUgaWQ9InRpdGxlIj7sgqzsp4TsnYQg7LaU6rCA7ZW0IOyjvOyEuOyalDwvdGl0bGU+CiAgPGRlc2MgaWQ9ImRlc2MiPuuqqOuwlOydvCDssq3ssqnsnqUg7IKs7KeEIOyekOumrCDtkZzsi5zsnpA8L2Rlc2M+CiAgPGRlZnM+CiAgICA8bGluZWFyR3JhZGllbnQgaWQ9ImJnIiB4MT0iMCIgeTE9IjAiIHgyPSIxIiB5Mj0iMSI+PHN0b3Agc3RvcC1jb2xvcj0iI2Q4YzhiYiIvPjxzdG9wIG9mZnNldD0iLjUiIHN0b3AtY29sb3I9IiNmNGVlZTgiLz48c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiNiYmM1YjgiLz48L2xpbmVhckdyYWRpZW50PgogICAgPGZpbHRlciBpZD0iYmx1ciI+PGZlR2F1c3NpYW5CbHVyIHN0ZERldmlhdGlvbj0iMTIiLz48L2ZpbHRlcj4KICA8L2RlZnM+CiAgPHJlY3Qgd2lkdGg9IjEyMDAiIGhlaWdodD0iMTUwMCIgZmlsbD0idXJsKCNiZykiLz4KICA8Y2lyY2xlIGN4PSIxNzAiIGN5PSIyNTAiIHI9IjIwMCIgZmlsbD0iI2Y3ZTVkNyIgb3BhY2l0eT0iLjciIGZpbHRlcj0idXJsKCNibHVyKSIvPgogIDxjaXJjbGUgY3g9Ijk1MCIgY3k9IjExMzAiIHI9IjMwMCIgZmlsbD0iIzkxYTY4ZCIgb3BhY2l0eT0iLjM1IiBmaWx0ZXI9InVybCgjYmx1cikiLz4KICA8ZyBmaWxsPSJub25lIiBzdHJva2U9IiNmZmZhZjUiIHN0cm9rZS13aWR0aD0iNCIgb3BhY2l0eT0iLjgiPjxwYXRoIGQ9Ik0zMjAgNjYwYzE0MC0yMTAgNDIwLTE5MCA1NTAgMTUiLz48cGF0aCBkPSJNMzUwIDcwMGMxMzAgMTYwIDM2MCAxNzAgNTAwIDAiLz48L2c+CiAgPHRleHQgeD0iNjAwIiB5PSI3NjAiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9IiM0YjU1NDkiIGZvbnQtZmFtaWx5PSJzZXJpZiIgZm9udC1zaXplPSIzOCIgbGV0dGVyLXNwYWNpbmc9IjUiPllPVVIgUEhPVE88L3RleHQ+CiAgPHRleHQgeD0iNjAwIiB5PSI4MTUiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9IiM0YjU1NDkiIGZvbnQtZmFtaWx5PSJzYW5zLXNlcmlmIiBmb250LXNpemU9IjIwIiBsZXR0ZXItc3BhY2luZz0iMiI+YXNzZXRzL3Bob3RvcyDtj7TrjZTsl5Ag7IKs7KeE7J2EIOuEo+qzoCDshKTsoJUg7YyM7J2866eMIOuwlOq/lCDso7zshLjsmpQ8L3RleHQ+Cjwvc3ZnPgo=","alt":"두 사람의 사진 5","caption":"기억하고 싶은 순간"},{"src":"data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMjAwIiBoZWlnaHQ9IjE1MDAiIHZpZXdCb3g9IjAgMCAxMjAwIDE1MDAiIHJvbGU9ImltZyIgYXJpYS1sYWJlbGxlZGJ5PSJ0aXRsZSBkZXNjIj4KICA8dGl0bGUgaWQ9InRpdGxlIj7sgqzsp4TsnYQg7LaU6rCA7ZW0IOyjvOyEuOyalDwvdGl0bGU+CiAgPGRlc2MgaWQ9ImRlc2MiPuuqqOuwlOydvCDssq3ssqnsnqUg7IKs7KeEIOyekOumrCDtkZzsi5zsnpA8L2Rlc2M+CiAgPGRlZnM+CiAgICA8bGluZWFyR3JhZGllbnQgaWQ9ImJnIiB4MT0iMCIgeTE9IjAiIHgyPSIxIiB5Mj0iMSI+PHN0b3Agc3RvcC1jb2xvcj0iI2Q4YzhiYiIvPjxzdG9wIG9mZnNldD0iLjUiIHN0b3AtY29sb3I9IiNmNGVlZTgiLz48c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiNiYmM1YjgiLz48L2xpbmVhckdyYWRpZW50PgogICAgPGZpbHRlciBpZD0iYmx1ciI+PGZlR2F1c3NpYW5CbHVyIHN0ZERldmlhdGlvbj0iMTIiLz48L2ZpbHRlcj4KICA8L2RlZnM+CiAgPHJlY3Qgd2lkdGg9IjEyMDAiIGhlaWdodD0iMTUwMCIgZmlsbD0idXJsKCNiZykiLz4KICA8Y2lyY2xlIGN4PSIxNzAiIGN5PSIyNTAiIHI9IjIwMCIgZmlsbD0iI2Y3ZTVkNyIgb3BhY2l0eT0iLjciIGZpbHRlcj0idXJsKCNibHVyKSIvPgogIDxjaXJjbGUgY3g9Ijk1MCIgY3k9IjExMzAiIHI9IjMwMCIgZmlsbD0iIzkxYTY4ZCIgb3BhY2l0eT0iLjM1IiBmaWx0ZXI9InVybCgjYmx1cikiLz4KICA8ZyBmaWxsPSJub25lIiBzdHJva2U9IiNmZmZhZjUiIHN0cm9rZS13aWR0aD0iNCIgb3BhY2l0eT0iLjgiPjxwYXRoIGQ9Ik0zMjAgNjYwYzE0MC0yMTAgNDIwLTE5MCA1NTAgMTUiLz48cGF0aCBkPSJNMzUwIDcwMGMxMzAgMTYwIDM2MCAxNzAgNTAwIDAiLz48L2c+CiAgPHRleHQgeD0iNjAwIiB5PSI3NjAiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9IiM0YjU1NDkiIGZvbnQtZmFtaWx5PSJzZXJpZiIgZm9udC1zaXplPSIzOCIgbGV0dGVyLXNwYWNpbmc9IjUiPllPVVIgUEhPVE88L3RleHQ+CiAgPHRleHQgeD0iNjAwIiB5PSI4MTUiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9IiM0YjU1NDkiIGZvbnQtZmFtaWx5PSJzYW5zLXNlcmlmIiBmb250LXNpemU9IjIwIiBsZXR0ZXItc3BhY2luZz0iMiI+YXNzZXRzL3Bob3RvcyDtj7TrjZTsl5Ag7IKs7KeE7J2EIOuEo+qzoCDshKTsoJUg7YyM7J2866eMIOuwlOq/lCDso7zshLjsmpQ8L3RleHQ+Cjwvc3ZnPgo=","alt":"두 사람의 사진 6","caption":"우리의 이야기"}],"venue":{"name":"웨딩홀 이름, 층/홀","address":"서울특별시 ○○구 ○○로 00, 웨딩홀 이름","mapUrl":"https://map.kakao.com/","mapPlaceName":"웨딩홀 이름"},"transport":[{"title":"지하철","body":"○○역 1번 출구에서 도보 5분"},{"title":"버스","body":"○○정류장 하차 · 간선 000 / 지선 000"},{"title":"주차","body":"예식장 지하 주차장 이용 · 3시간 무료"}],"accounts":[{"group":"신랑측","name":"신랑 이름","bank":"○○은행","number":"000-0000-0000-00"},{"group":"신부측","name":"신부 이름","bank":"○○은행","number":"000-0000-0000-00"}],"guestbook":{"endpoint":"","turnstileSiteKey":"","initialMessages":[{"name":"소중한 친구","message":"두 분의 새로운 시작을 진심으로 축하합니다.","date":"2027. 09. 01"},{"name":"가족","message":"늘 행복하고 웃음 가득한 날들 보내세요.","date":"2027. 09. 03"}]},"footer":"신랑 이름 · 신부 이름의 결혼식에 초대합니다"}
-    </script>
+    <div id="invitationApp"></div>
     <script>
 (() => {
   "use strict";
 
-  const $ = (selector) => document.querySelector(selector);
-  const state = { data: null, galleryIndex: 0, visibleGalleryCount: 6, guestbookSubmitted: false };
   const fallbackPhoto = "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMjAwIiBoZWlnaHQ9IjE1MDAiIHZpZXdCb3g9IjAgMCAxMjAwIDE1MDAiIHJvbGU9ImltZyIgYXJpYS1sYWJlbGxlZGJ5PSJ0aXRsZSBkZXNjIj4KICA8dGl0bGUgaWQ9InRpdGxlIj7sgqzsp4TsnYQg7LaU6rCA7ZW0IOyjvOyEuOyalDwvdGl0bGU+CiAgPGRlc2MgaWQ9ImRlc2MiPuuqqOuwlOydvCDssq3ssqnsnqUg7IKs7KeEIOyekOumrCDtkZzsi5zsnpA8L2Rlc2M+CiAgPGRlZnM+CiAgICA8bGluZWFyR3JhZGllbnQgaWQ9ImJnIiB4MT0iMCIgeTE9IjAiIHgyPSIxIiB5Mj0iMSI+PHN0b3Agc3RvcC1jb2xvcj0iI2Q4YzhiYiIvPjxzdG9wIG9mZnNldD0iLjUiIHN0b3AtY29sb3I9IiNmNGVlZTgiLz48c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiNiYmM1YjgiLz48L2xpbmVhckdyYWRpZW50PgogICAgPGZpbHRlciBpZD0iYmx1ciI+PGZlR2F1c3NpYW5CbHVyIHN0ZERldmlhdGlvbj0iMTIiLz48L2ZpbHRlcj4KICA8L2RlZnM+CiAgPHJlY3Qgd2lkdGg9IjEyMDAiIGhlaWdodD0iMTUwMCIgZmlsbD0idXJsKCNiZykiLz4KICA8Y2lyY2xlIGN4PSIxNzAiIGN5PSIyNTAiIHI9IjIwMCIgZmlsbD0iI2Y3ZTVkNyIgb3BhY2l0eT0iLjciIGZpbHRlcj0idXJsKCNibHVyKSIvPgogIDxjaXJjbGUgY3g9Ijk1MCIgY3k9IjExMzAiIHI9IjMwMCIgZmlsbD0iIzkxYTY4ZCIgb3BhY2l0eT0iLjM1IiBmaWx0ZXI9InVybCgjYmx1cikiLz4KICA8ZyBmaWxsPSJub25lIiBzdHJva2U9IiNmZmZhZjUiIHN0cm9rZS13aWR0aD0iNCIgb3BhY2l0eT0iLjgiPjxwYXRoIGQ9Ik0zMjAgNjYwYzE0MC0yMTAgNDIwLTE5MCA1NTAgMTUiLz48cGF0aCBkPSJNMzUwIDcwMGMxMzAgMTYwIDM2MCAxNzAgNTAwIDAiLz48L2c+CiAgPHRleHQgeD0iNjAwIiB5PSI3NjAiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9IiM0YjU1NDkiIGZvbnQtZmFtaWx5PSJzZXJpZiIgZm9udC1zaXplPSIzOCIgbGV0dGVyLXNwYWNpbmc9IjUiPllPVVIgUEhPVE88L3RleHQ+CiAgPHRleHQgeD0iNjAwIiB5PSI4MTUiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9IiM0YjU1NDkiIGZvbnQtZmFtaWx5PSJzYW5zLXNlcmlmIiBmb250LXNpemU9IjIwIiBsZXR0ZXItc3BhY2luZz0iMiI+YXNzZXRzL3Bob3RvcyDtj7TrjZTsl5Ag7IKs7KeE7J2EIOuEo+qzoCDshKTsoJUg7YyM7J2866eMIOuwlOq/lCDso7zshLjsmpQ8L3RleHQ+Cjwvc3ZnPgo=";
-  const koreanDate = new Intl.DateTimeFormat("ko-KR", { year: "numeric", month: "long", day: "numeric", weekday: "short", timeZone: "Asia/Seoul" });
+  const invitation = {
+    groom: "기도희",
+    bride: "소혜지",
+    date: "2027년 1월 30일 토요일 오후 2시",
+    dateISO: "2027-01-30T14:00:00+09:00",
+    venue: "더 컨벤션 송파문정",
+    address: "서울특별시 송파구 송파대로 155, NH송파농협",
+    message: "서로의 평범한 하루를 특별하게 만들어준 두 사람.\n이제 같은 곳을 바라보며 새로운 시작을 하려 합니다.\n\n귀한 걸음으로 함께해 주신다면\n저희의 첫 페이지를 축복해 주세요.",
+    gallery: ["우리의 첫 번째 장면", "마주 보는 시간", "빛나던 하루", "같이 걷는 길", "기억하고 싶은 순간", "우리의 이야기"].map((caption, index) => ({ src: fallbackPhoto, alt: `두 사람의 사진 ${index + 1}`, caption })),
+    accounts: [
+      { group: "신부측", name: "소혜지", bank: "○○은행", number: "000-0000-0000-00" },
+      { group: "신랑측", name: "기도희", bank: "○○은행", number: "000-0000-0000-00" }
+    ]
+  };
 
-  function formatDateParts(dateString) {
-    const match = String(dateString).match(/^(\d{4})-(\d{2})-(\d{2})/);
-    const value = match ? new Date(Number(match[1]), Number(match[2]) - 1, Number(match[3])) : new Date(dateString);
-    return {
-      year: value.getFullYear(),
-      month: value.getMonth() + 1,
-      day: value.getDate(),
-      weekday: ["일", "월", "화", "수", "목", "금", "토"][value.getDay()]
-    };
-  }
+  const state = { photoIndex: 0, swipeStartX: null };
+  const app = document.querySelector("#invitationApp");
+  const escape = (value) => String(value).replace(/[&<>'"]/g, (character) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", "'": "&#39;", '"': "&quot;" })[character]);
+  const photo = (item) => item?.src || fallbackPhoto;
 
-  function setText(selector, value) {
-    const element = $(selector);
-    if (element) element.textContent = value || "";
-  }
-
-  function safeImage(image, source, alt) {
-    image.src = source || fallbackPhoto;
-    image.alt = alt || "사진";
-    image.addEventListener("error", () => {
-      if (!image.src.endsWith(fallbackPhoto)) image.src = fallbackPhoto;
-    }, { once: true });
-  }
-
-  function renderParents(data) {
-    const parentList = $("#parents");
-    const people = [
-      { label: "신랑", person: data.groom },
-      { label: "신부", person: data.bride }
-    ];
-    parentList.replaceChildren(...people.map(({ label, person }) => {
-      const row = document.createElement("p");
-      row.className = "parent-row";
-      const labelElement = document.createElement("small");
-      labelElement.textContent = label;
-      const parents = document.createElement("span");
-      parents.textContent = `${person.father} · ${person.mother}`;
-      const of = document.createElement("em");
-      of.textContent = "의";
-      const name = document.createElement("strong");
-      name.textContent = person.name;
-      row.append(labelElement, parents, of, name);
-      return row;
-    }));
-  }
-
-  function renderCalendar(data) {
-    const parts = formatDateParts(data.date);
-    setText("#scheduleTitle", data.dateDisplay || koreanDate.format(new Date(data.date)));
-    setText("#calendarMonth", `${parts.year}. ${String(parts.month).padStart(2, "0")}`);
-
-    const firstDay = new Date(parts.year, parts.month - 1, 1).getDay();
-    const lastDate = new Date(parts.year, parts.month, 0).getDate();
+  function calendarMarkup() {
+    const date = new Date(invitation.dateISO);
+    const year = date.getFullYear();
+    const month = date.getMonth();
+    const weddingDay = date.getDate();
+    const firstDay = new Date(year, month, 1).getDay();
+    const lastDay = new Date(year, month + 1, 0).getDate();
     const cells = [];
-    for (let i = 0; i < firstDay; i += 1) cells.push(null);
-    for (let day = 1; day <= lastDate; day += 1) cells.push(day);
-    while (cells.length % 7 !== 0) cells.push(null);
-
-    const days = $("#calendarDays");
-    days.replaceChildren(...cells.map((day) => {
-      const cell = document.createElement("span");
-      if (day === null) cell.className = "calendar-day--empty";
-      else {
-        cell.textContent = day;
-        if (day === parts.day) {
-          cell.classList.add("calendar-day--wedding");
-          cell.setAttribute("aria-label", `결혼식 날짜 ${day}일`);
-        }
-      }
-      return cell;
-    }));
-  }
-
-  function updateCountdown(dateString) {
-    const countdown = $("#countdown");
-    const target = new Date(dateString).getTime();
-    const remaining = Math.max(0, target - Date.now());
-    const units = [
-      ["일", Math.floor(remaining / 86400000)],
-      ["시간", Math.floor((remaining / 3600000) % 24)],
-      ["분", Math.floor((remaining / 60000) % 60)],
-      ["초", Math.floor((remaining / 1000) % 60)]
-    ];
-    countdown.replaceChildren(...units.map(([label, number]) => {
-      const element = document.createElement("div");
-      element.className = "countdown__unit";
-      const value = document.createElement("strong");
-      value.textContent = String(number).padStart(2, "0");
-      const unit = document.createElement("span");
-      unit.textContent = label;
-      element.append(value, unit);
-      return element;
-    }));
-  }
-
-  function renderMoments(items) {
-    const collage = $("#momentCollage");
-    const photos = items?.length ? items : [{ src: fallbackPhoto, alt: "사진 자리" }];
-    collage.replaceChildren(...photos.slice(0, 3).map((item) => {
-      const wrapper = document.createElement("div");
-      wrapper.className = "moment";
-      const image = document.createElement("img");
-      image.loading = "lazy";
-      safeImage(image, item.src, item.alt);
-      wrapper.append(image);
-      return wrapper;
-    }));
-  }
-
-  function imageButton(item, index) {
-    const button = document.createElement("button");
-    button.className = "gallery-item";
-    button.type = "button";
-    button.setAttribute("aria-label", `${item.alt || "사진"} 크게 보기`);
-    const image = document.createElement("img");
-    image.loading = "lazy";
-    safeImage(image, item.src, item.alt);
-    button.append(image);
-    button.addEventListener("click", () => openLightbox(index));
-    return button;
-  }
-
-  function renderGallery() {
-    const gallery = state.data.gallery || [];
-    const grid = $("#galleryGrid");
-    const galleryItems = gallery.slice(0, state.visibleGalleryCount).map(imageButton);
-    grid.replaceChildren(...galleryItems);
-    const more = $("#galleryMore");
-    more.hidden = gallery.length <= state.visibleGalleryCount;
-  }
-
-  function openLightbox(index) {
-    const gallery = state.data.gallery || [];
-    if (!gallery.length) return;
-    state.galleryIndex = index;
-    const item = gallery[index];
-    safeImage($("#lightboxImage"), item.src, item.alt);
-    setText("#lightboxCaption", item.caption || item.alt || "");
-    const dialog = $("#lightbox");
-    if (!dialog.open) dialog.showModal();
-  }
-
-  function moveLightbox(delta) {
-    const total = state.data.gallery?.length || 0;
-    if (!total) return;
-    openLightbox((state.galleryIndex + delta + total) % total);
-  }
-
-  function renderLocation(data) {
-    const venue = data.venue || {};
-    setText("#venueName", venue.name);
-    setText("#venueAddress", venue.address);
-    setText("#mapPlaceName", venue.mapPlaceName || venue.name);
-    const mapLink = $("#mapLink");
-    mapLink.href = venue.mapUrl || "https://map.kakao.com/";
-    const transport = $("#transport");
-    transport.replaceChildren(...(data.transport || []).map((item) => {
-      const row = document.createElement("div");
-      row.className = "transport__row";
-      const title = document.createElement("strong");
-      title.textContent = item.title;
-      const body = document.createElement("span");
-      body.textContent = item.body;
-      row.append(title, body);
-      return row;
-    }));
-  }
-
-  function copyText(value, message) {
-    if (!value) return showToast("복사할 내용이 없습니다.");
-    const complete = () => showToast(message || "복사했습니다.");
-    if (navigator.clipboard?.writeText) {
-      navigator.clipboard.writeText(value).then(complete).catch(() => fallbackCopy(value, complete));
-    } else fallbackCopy(value, complete);
-  }
-
-  function fallbackCopy(value, complete) {
-    const area = document.createElement("textarea");
-    area.value = value;
-    area.style.position = "fixed";
-    area.style.opacity = "0";
-    document.body.append(area);
-    area.select();
-    try { document.execCommand("copy"); complete(); } catch { showToast("복사하지 못했습니다. 직접 선택해 주세요."); }
-    area.remove();
-  }
-
-  function renderAccounts(items) {
-    const list = $("#accountsList");
-    list.replaceChildren(...(items || []).map((item) => {
-      const account = document.createElement("article");
-      account.className = "account";
-      const top = document.createElement("div");
-      top.className = "account__top";
-      const group = document.createElement("span");
-      group.className = "account__group";
-      group.textContent = item.group;
-      const name = document.createElement("strong");
-      name.className = "account__name";
-      name.textContent = item.name;
-      top.append(group, name);
-      const number = document.createElement("p");
-      number.className = "account__number";
-      number.textContent = `${item.bank} ${item.number}`;
-      const copy = document.createElement("button");
-      copy.type = "button";
-      copy.textContent = "계좌번호 복사";
-      copy.addEventListener("click", () => copyText(item.number, "계좌번호를 복사했습니다."));
-      account.append(top, number, copy);
-      return account;
-    }));
-  }
-
-  function formatGuestDate(value) {
-    if (!value) return "";
-    if (/^\d{4}\.\s?\d{2}\.\s?\d{2}$/.test(value)) return value;
-    const date = new Date(value);
-    return Number.isNaN(date.getTime()) ? value : `${date.getFullYear()}. ${String(date.getMonth() + 1).padStart(2, "0")}. ${String(date.getDate()).padStart(2, "0")}`;
-  }
-
-  function renderGuestbook(messages) {
-    const list = $("#guestbookList");
-    if (!messages?.length) {
-      const empty = document.createElement("p");
-      empty.className = "guestbook-empty";
-      empty.textContent = "첫 번째 축하 글을 남겨주세요.";
-      list.replaceChildren(empty);
-      return;
+    for (let index = 0; index < firstDay; index += 1) cells.push('<span class="calendar__day calendar__day--blank" aria-hidden="true"></span>');
+    for (let day = 1; day <= lastDay; day += 1) {
+      const isWedding = day === weddingDay;
+      cells.push(`<span class="calendar__day${isWedding ? " calendar__day--wedding" : ""}"${isWedding ? ' aria-label="결혼식 당일, 1월 30일"' : ""}>${day}</span>`);
     }
-    list.replaceChildren(...messages.slice(0, 30).map((item) => {
-      const entry = document.createElement("article");
-      entry.className = "guestbook-entry";
-      const meta = document.createElement("div");
-      meta.className = "guestbook-entry__meta";
-      const name = document.createElement("strong");
-      name.textContent = item.name || "익명";
-      const date = document.createElement("time");
-      date.textContent = formatGuestDate(item.date || item.createdAt);
-      meta.append(name, date);
-      const body = document.createElement("p");
-      body.textContent = item.message || "";
-      entry.append(meta, body);
-      return entry;
-    }));
+    return `<div class="calendar" aria-label="${year}년 ${month + 1}월 달력"><p class="calendar__month">${year}. ${String(month + 1).padStart(2, "0")}</p><div class="calendar__week" aria-hidden="true"><span>일</span><span>월</span><span>화</span><span>수</span><span>목</span><span>금</span><span>토</span></div><div class="calendar__days">${cells.join("")}</div><p class="calendar__note"><span></span>${month + 1}월 ${weddingDay}일, 토요일</p></div>`;
   }
 
-  function loadGuestbook(endpoint, fallbackMessages) {
-    if (!endpoint) return renderGuestbook(fallbackMessages);
-    const callback = `guestbookCallback_${Date.now()}`;
-    const script = document.createElement("script");
-    const separator = endpoint.includes("?") ? "&" : "?";
-    const cleanup = () => {
-      delete window[callback];
-      script.remove();
-    };
-    const timeout = window.setTimeout(() => { cleanup(); renderGuestbook(fallbackMessages); }, 8000);
-    window[callback] = (result) => {
-      window.clearTimeout(timeout);
-      cleanup();
-      renderGuestbook(Array.isArray(result?.messages) ? result.messages : fallbackMessages);
-    };
-    script.onerror = () => { window.clearTimeout(timeout); cleanup(); renderGuestbook(fallbackMessages); };
-    script.src = `${endpoint}${separator}action=messages&callback=${callback}`;
-    document.head.append(script);
+  function directionMarkup() {
+    return `<div class="directions"><div class="map-sketch" role="img" aria-label="문정역 3번 출구에서 더 컨벤션 송파문정까지 도보 5분 약도"><span class="map-sketch__venue">더 컨벤션<br>송파문정</span><span class="map-sketch__station">문정역<br><small>3번 출구</small></span><span class="map-sketch__walk">도보 5분</span><i class="map-sketch__route"></i><i class="map-sketch__road map-sketch__road--vertical"></i><i class="map-sketch__road map-sketch__road--horizontal"></i></div><div class="transport"><article><h3>지하철</h3><p>8호선 문정역 3번 출구<br>도보 5분</p></article><article><h3>버스</h3><p>문정역 · 문정법조단지 정류장 하차<br>간선 302 · 303 · 320 · 333 · 350 · 360 · 362<br>지선 3012 · 3322</p></article><article><h3>주차 안내</h3><p>NH송파농협 건물 내 주차장 이용 가능 (약 800대)<br>예식장 외 주차장이 혼잡할 수 있으니 가급적 대중교통 이용을 부탁드립니다.</p></article></div></div>`;
   }
 
-  function renderTurnstile(siteKey) {
-    if (!siteKey) return;
-    const widget = document.createElement("div");
-    widget.className = "cf-turnstile";
-    widget.dataset.sitekey = siteKey;
-    $("#turnstileContainer").append(widget);
-    const script = document.createElement("script");
-    script.src = "https://challenges.cloudflare.com/turnstile/v0/api.js";
-    script.async = true;
-    script.defer = true;
-    document.head.append(script);
+  function appMarkup() {
+    const accounts = invitation.accounts.map((item) => `<details class="account"><summary><span><small>${escape(item.group)}</small><strong>${escape(item.name)}</strong></span></summary><div class="account__inside"><p>${escape(item.bank)} ${escape(item.number)}</p><button type="button" data-copy-account="${escape(item.number)}">계좌번호 복사</button></div></details>`).join("");
+    const firstPhoto = invitation.gallery[0];
+    return `<div class="scene" aria-hidden="true"><div class="scene__petals" id="petalField"></div></div><div class="app"><main><section class="hero" style="--hero-image:url('${escape(photo(firstPhoto))}')"><div class="hero__content"><h1 class="hero__title">We are getting married</h1><div class="hero__bottom"><p class="hero__names">${escape(invitation.bride)} <span>&amp;</span> ${escape(invitation.groom)}</p><p class="hero__date">${escape(invitation.date)}</p></div></div></section><section class="section section--cream" id="message" data-reveal><p class="eyebrow">INVITATION</p><h2 class="section-title">소중한 분들을 초대합니다</h2><p class="message">${escape(invitation.message)}</p><div class="family"><p><small>신부</small> 아버지 소진남 · 어머니 노경화의 <strong>혜지</strong></p><p><small>신랑</small> 아버지 기계석 · 어머니 유은정의 <strong>도희</strong></p></div></section><section class="section section--sage" id="moments" data-reveal><h2 class="gallery-heading">Our Memories</h2><div class="photo-story" id="photoStory" tabindex="0" aria-label="사진첩. 좌우로 밀거나 버튼을 눌러 사진을 넘길 수 있습니다."><div class="photo-story__frame"><img id="storyImage" src="${escape(photo(firstPhoto))}" alt="${escape(firstPhoto.alt)}" /><button class="photo-story__nav photo-story__nav--previous" id="photoPrevious" type="button" aria-label="이전 사진">‹</button><button class="photo-story__nav photo-story__nav--next" id="photoNext" type="button" aria-label="다음 사진">›</button></div><div class="photo-story__meta"><span id="photoCount" class="photo-story__count">01 / ${String(invitation.gallery.length).padStart(2, "0")}</span><p id="photoCaption" aria-live="polite">${escape(firstPhoto.caption)}</p></div></div></section><section class="section" data-reveal><p class="eyebrow">THE DAY</p><h2 class="section-title">${escape(invitation.date)}</h2><div class="schedule-card"><strong>2027. 01. 30. SAT</strong><p>두 사람이 함께 시작할 첫 번째 날입니다.</p><div class="countdown" id="countdown"></div></div>${calendarMarkup()}</section><section class="section section--cream" data-reveal><p class="eyebrow">LOCATION</p><h2 class="section-title">${escape(invitation.venue)}</h2><p class="location-address">${escape(invitation.address)}</p>${directionMarkup()}<div class="location-actions"><a class="button button--solid" href="https://map.kakao.com/?q=%EB%8D%94%20%EC%BB%A8%EB%B2%A4%EC%85%98%20%EC%86%A1%ED%8C%8C%EB%AC%B8%EC%A0%95" target="_blank" rel="noreferrer">지도 보기</a><button class="button" type="button" id="copyAddress">주소 복사</button></div></section><section class="section" data-reveal><p class="eyebrow">GIFT</p><h2 class="section-title">마음 전하실 곳</h2><p class="description">계좌 카드를 눌러 계좌번호를 확인할 수 있습니다.</p><div class="accounts">${accounts}</div></section><section class="section section--sage" data-reveal><p class="eyebrow">GUESTBOOK</p><h2 class="section-title">따뜻한 마음을 남겨주세요</h2><div class="guest"><article><header><strong>소중한 친구</strong><time>2027. 09. 01</time></header><p>두 분의 새로운 시작을 진심으로 축하합니다.</p></article><article><header><strong>가족</strong><time>2027. 09. 03</time></header><p>늘 행복하고 웃음 가득한 날들 보내세요.</p></article></div></section></main><footer class="footer">${escape(invitation.bride)} · ${escape(invitation.groom)}의 결혼식에 초대합니다</footer><div class="share-strip"><button class="share-kakao" id="shareKakao" type="button"><span class="talk">TALK</span>카카오톡으로 공유하기</button><button class="share-copy" id="shareCopy" type="button">링크 복사</button></div></div>`;
   }
 
-  function setupGuestbook(config) {
-    const form = $("#guestbookForm");
-    const endpoint = String(config.endpoint || "").trim();
-    const submit = $("#guestbookSubmit");
-    const status = $("#guestbookStatus");
-    $("#formToken").value = crypto?.randomUUID?.() || `${Date.now()}-${Math.random()}`;
-    $("#guestbookPage").value = location.href.split("#")[0];
-    loadGuestbook(endpoint, config.initialMessages || []);
+  function setImageFallback(image) { image.addEventListener("error", () => { if (image.getAttribute("src") !== fallbackPhoto) image.src = fallbackPhoto; }); }
+  function renderCountdown() { const remaining = Math.max(0, new Date(invitation.dateISO).getTime() - Date.now()); const units = [["일", Math.floor(remaining / 86400000)], ["시간", Math.floor(remaining / 3600000) % 24], ["분", Math.floor(remaining / 60000) % 60], ["초", Math.floor(remaining / 1000) % 60]]; document.querySelector("#countdown").innerHTML = units.map(([label, value]) => `<div><strong>${String(value).padStart(2, "0")}</strong><span>${label}</span></div>`).join(""); }
+  function renderPhoto(direction = "next") { const item = invitation.gallery[state.photoIndex]; const image = document.querySelector("#storyImage"); image.classList.remove("photo-story__image--from-left", "photo-story__image--from-right"); void image.offsetWidth; image.classList.add(direction === "previous" ? "photo-story__image--from-left" : "photo-story__image--from-right"); image.src = photo(item); image.alt = item.alt; document.querySelector("#photoCaption").textContent = item.caption; document.querySelector("#photoCount").textContent = `${String(state.photoIndex + 1).padStart(2, "0")} / ${String(invitation.gallery.length).padStart(2, "0")}`; }
+  function movePhoto(delta) { state.photoIndex = (state.photoIndex + delta + invitation.gallery.length) % invitation.gallery.length; renderPhoto(delta < 0 ? "previous" : "next"); }
+  function copyText(value) { if (navigator.clipboard?.writeText) navigator.clipboard.writeText(value).catch(() => window.prompt("복사해 주세요.", value)); else window.prompt("복사해 주세요.", value); }
+  function setupPetalVariation() { const field = document.querySelector("#petalField"); const random = (min, max) => min + Math.random() * (max - min); const createPetal = () => { const petal = document.createElement("span"); petal.className = "petal"; petal.style.setProperty("--x", `${random(6, 91).toFixed(1)}%`); petal.style.setProperty("--s", `${random(9, 16).toFixed(1)}px`); petal.style.setProperty("--angle", `${random(-42, 42).toFixed(0)}deg`); petal.style.setProperty("--d", `${random(16, 20).toFixed(1)}s`); petal.style.setProperty("--opacity", random(.28, .48).toFixed(2)); petal.addEventListener("animationend", () => petal.remove(), { once: true }); field.append(petal); }; const schedulePetal = () => { createPetal(); window.setTimeout(schedulePetal, random(1100, 1600)); }; schedulePetal(); }
+  function setupCarousel() { const story = document.querySelector("#photoStory"); document.querySelector("#photoPrevious").addEventListener("click", () => movePhoto(-1)); document.querySelector("#photoNext").addEventListener("click", () => movePhoto(1)); story.addEventListener("pointerdown", (event) => { if (event.target.closest("button")) return; state.swipeStartX = event.clientX; story.setPointerCapture?.(event.pointerId); }); story.addEventListener("pointerup", (event) => { if (state.swipeStartX === null) return; const distance = event.clientX - state.swipeStartX; state.swipeStartX = null; if (Math.abs(distance) >= 42) movePhoto(distance < 0 ? 1 : -1); }); story.addEventListener("pointercancel", () => { state.swipeStartX = null; }); story.addEventListener("keydown", (event) => { if (event.key === "ArrowLeft") { event.preventDefault(); movePhoto(-1); } if (event.key === "ArrowRight") { event.preventDefault(); movePhoto(1); } }); }
+  function setupEvents() { document.querySelectorAll("img").forEach(setImageFallback); setupCarousel(); document.querySelector("#copyAddress").addEventListener("click", () => copyText(invitation.address)); document.querySelectorAll("[data-copy-account]").forEach((button) => button.addEventListener("click", () => copyText(button.dataset.copyAccount))); document.querySelector("#shareCopy").addEventListener("click", () => copyText(location.href)); document.querySelector("#shareKakao").addEventListener("click", async () => { if (navigator.share) { try { await navigator.share({ title: document.title, text: "기도희 · 소혜지의 모바일 청첩장", url: location.href }); return; } catch (error) { if (error?.name === "AbortError") return; } } copyText(location.href); }); }
+  function setupReveal() { const targets = document.querySelectorAll("[data-reveal]"); if (!window.IntersectionObserver || window.matchMedia("(prefers-reduced-motion: reduce)").matches) { targets.forEach((target) => target.classList.add("visible")); return; } const observer = new IntersectionObserver((entries) => entries.forEach((entry) => { if (entry.isIntersecting) { entry.target.classList.add("visible"); observer.unobserve(entry.target); } }), { threshold: 0.12 }); targets.forEach((target) => observer.observe(target)); }
 
-    if (!endpoint || !endpoint.startsWith("https://")) {
-      submit.disabled = true;
-      submit.textContent = "방명록 설정 후 이용 가능";
-      status.textContent = "관리자는 운영 가이드의 방명록 설정을 완료해 주세요.";
-      return;
-    }
-
-    form.action = endpoint;
-    renderTurnstile(config.turnstileSiteKey);
-    $("#guestbookFrame").addEventListener("load", () => {
-      if (!state.guestbookSubmitted) return;
-      state.guestbookSubmitted = false;
-      submit.disabled = false;
-      submit.textContent = "축하 글 남기기";
-      status.classList.remove("form-message--error");
-      status.textContent = "축하 글을 받았습니다. 확인 후 방명록에 공개됩니다.";
-      form.reset();
-    });
-    form.addEventListener("submit", (event) => {
-      const name = $("#guestName").value.trim();
-      const message = $("#guestMessage").value.trim();
-      if (!name || !message) {
-        event.preventDefault();
-        status.classList.add("form-message--error");
-        status.textContent = "이름과 축하 메시지를 입력해 주세요.";
-        return;
-      }
-      state.guestbookSubmitted = true;
-      submit.disabled = true;
-      submit.textContent = "전송 중…";
-      status.classList.remove("form-message--error");
-      status.textContent = "안전하게 전송하고 있습니다.";
-    });
-  }
-
-  function showToast(message) {
-    const toast = $("#toast");
-    toast.textContent = message;
-    toast.classList.add("toast--visible");
-    window.clearTimeout(showToast.timer);
-    showToast.timer = window.setTimeout(() => toast.classList.remove("toast--visible"), 2300);
-  }
-
-  function setupInteractions(data) {
-    $("#galleryMore").addEventListener("click", () => { state.visibleGalleryCount += 6; renderGallery(); });
-    $("#lightboxClose").addEventListener("click", () => $("#lightbox").close());
-    $("#lightboxPrevious").addEventListener("click", () => moveLightbox(-1));
-    $("#lightboxNext").addEventListener("click", () => moveLightbox(1));
-    $("#lightbox").addEventListener("click", (event) => { if (event.target === $("#lightbox")) $("#lightbox").close(); });
-    document.addEventListener("keydown", (event) => {
-      if (!$("#lightbox").open) return;
-      if (event.key === "ArrowLeft") moveLightbox(-1);
-      if (event.key === "ArrowRight") moveLightbox(1);
-    });
-    $("#copyAddress").addEventListener("click", () => copyText(data.venue?.address, "예식장 주소를 복사했습니다."));
-  }
-
-  function renderInvitation(data) {
-    state.data = data;
-    document.title = data.siteTitle || "모바일 청첩장";
-    const groom = data.groom?.name || "신랑";
-    const bride = data.bride?.name || "신부";
-    const names = $("#heroNames");
-    names.replaceChildren(document.createTextNode(`${groom} `), Object.assign(document.createElement("span"), { textContent: "&" }), document.createTextNode(` ${bride}`));
-    setText("#heroDate", data.dateDisplay || koreanDate.format(new Date(data.date)));
-    safeImage($("#heroImage"), data.heroImage, data.heroAlt);
-    setText("#invitationText", data.invitation);
-    setText("#footer", data.footer);
-    renderParents(data);
-    renderCalendar(data);
-    updateCountdown(data.date);
-    window.setInterval(() => updateCountdown(data.date), 1000);
-    renderMoments(data.momentPhotos);
-    renderGallery();
-    renderLocation(data);
-    renderAccounts(data.accounts);
-    setupGuestbook(data.guestbook || {});
-    setupInteractions(data);
-  }
-
-  async function boot() {
-    try {
-      const embedded = document.querySelector("#embeddedInvitationConfig");
-      if (embedded?.textContent?.trim()) {
-        renderInvitation(JSON.parse(embedded.textContent));
-        return;
-      }
-      const response = await fetch("data/invitation.json", { cache: "no-store" });
-      if (!response.ok) throw new Error(`설정 파일을 읽지 못했습니다 (${response.status})`);
-      renderInvitation(await response.json());
-    } catch (error) {
-      console.error(error);
-      setText("#invitationText", "청첩장 정보를 불러오지 못했습니다. 잠시 후 다시 시도해 주세요.");
-      showToast("청첩장 정보를 불러오지 못했습니다.");
-    }
-  }
-
-  boot();
-})();
-
-</script>
-    <script>
-(() => {
-  "use strict";
-
-  function getConfig() {
-    const embedded = document.querySelector("#embeddedInvitationConfig");
-    try { return JSON.parse(embedded?.textContent || "{}"); } catch { return {}; }
-  }
-
-  function createSheet(gallery, originalItems) {
-    const sheet = document.createElement("dialog");
-    sheet.className = "gallery-sheet";
-    sheet.setAttribute("aria-label", "전체 사진 보기");
-    const handle = document.createElement("div");
-    handle.className = "gallery-sheet__handle";
-    const head = document.createElement("div");
-    head.className = "gallery-sheet__head";
-    const heading = document.createElement("h2");
-    heading.textContent = `두 사람의 모든 순간 · ${gallery.length}`;
-    const close = document.createElement("button");
-    close.type = "button";
-    close.setAttribute("aria-label", "전체 사진 닫기");
-    close.textContent = "×";
-    close.addEventListener("click", () => sheet.close());
-    head.append(heading, close);
-    const grid = document.createElement("div");
-    grid.className = "gallery-sheet__grid";
-    gallery.forEach((photo, index) => {
-      const button = document.createElement("button");
-      button.className = "gallery-sheet__item";
-      button.type = "button";
-      button.setAttribute("aria-label", `${photo.alt || "사진"} 크게 보기`);
-      const image = document.createElement("img");
-      image.src = photo.src || "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMjAwIiBoZWlnaHQ9IjE1MDAiIHZpZXdCb3g9IjAgMCAxMjAwIDE1MDAiIHJvbGU9ImltZyIgYXJpYS1sYWJlbGxlZGJ5PSJ0aXRsZSBkZXNjIj4KICA8dGl0bGUgaWQ9InRpdGxlIj7sgqzsp4TsnYQg7LaU6rCA7ZW0IOyjvOyEuOyalDwvdGl0bGU+CiAgPGRlc2MgaWQ9ImRlc2MiPuuqqOuwlOydvCDssq3ssqnsnqUg7IKs7KeEIOyekOumrCDtkZzsi5zsnpA8L2Rlc2M+CiAgPGRlZnM+CiAgICA8bGluZWFyR3JhZGllbnQgaWQ9ImJnIiB4MT0iMCIgeTE9IjAiIHgyPSIxIiB5Mj0iMSI+PHN0b3Agc3RvcC1jb2xvcj0iI2Q4YzhiYiIvPjxzdG9wIG9mZnNldD0iLjUiIHN0b3AtY29sb3I9IiNmNGVlZTgiLz48c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiNiYmM1YjgiLz48L2xpbmVhckdyYWRpZW50PgogICAgPGZpbHRlciBpZD0iYmx1ciI+PGZlR2F1c3NpYW5CbHVyIHN0ZERldmlhdGlvbj0iMTIiLz48L2ZpbHRlcj4KICA8L2RlZnM+CiAgPHJlY3Qgd2lkdGg9IjEyMDAiIGhlaWdodD0iMTUwMCIgZmlsbD0idXJsKCNiZykiLz4KICA8Y2lyY2xlIGN4PSIxNzAiIGN5PSIyNTAiIHI9IjIwMCIgZmlsbD0iI2Y3ZTVkNyIgb3BhY2l0eT0iLjciIGZpbHRlcj0idXJsKCNibHVyKSIvPgogIDxjaXJjbGUgY3g9Ijk1MCIgY3k9IjExMzAiIHI9IjMwMCIgZmlsbD0iIzkxYTY4ZCIgb3BhY2l0eT0iLjM1IiBmaWx0ZXI9InVybCgjYmx1cikiLz4KICA8ZyBmaWxsPSJub25lIiBzdHJva2U9IiNmZmZhZjUiIHN0cm9rZS13aWR0aD0iNCIgb3BhY2l0eT0iLjgiPjxwYXRoIGQ9Ik0zMjAgNjYwYzE0MC0yMTAgNDIwLTE5MCA1NTAgMTUiLz48cGF0aCBkPSJNMzUwIDcwMGMxMzAgMTYwIDM2MCAxNzAgNTAwIDAiLz48L2c+CiAgPHRleHQgeD0iNjAwIiB5PSI3NjAiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9IiM0YjU1NDkiIGZvbnQtZmFtaWx5PSJzZXJpZiIgZm9udC1zaXplPSIzOCIgbGV0dGVyLXNwYWNpbmc9IjUiPllPVVIgUEhPVE88L3RleHQ+CiAgPHRleHQgeD0iNjAwIiB5PSI4MTUiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9IiM0YjU1NDkiIGZvbnQtZmFtaWx5PSJzYW5zLXNlcmlmIiBmb250LXNpemU9IjIwIiBsZXR0ZXItc3BhY2luZz0iMiI+YXNzZXRzL3Bob3RvcyDtj7TrjZTsl5Ag7IKs7KeE7J2EIOuEo+qzoCDshKTsoJUg7YyM7J2866eMIOuwlOq/lCDso7zshLjsmpQ8L3RleHQ+Cjwvc3ZnPgo=";
-      image.alt = photo.alt || "사진";
-      image.loading = "lazy";
-      image.addEventListener("error", () => { image.src = "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMjAwIiBoZWlnaHQ9IjE1MDAiIHZpZXdCb3g9IjAgMCAxMjAwIDE1MDAiIHJvbGU9ImltZyIgYXJpYS1sYWJlbGxlZGJ5PSJ0aXRsZSBkZXNjIj4KICA8dGl0bGUgaWQ9InRpdGxlIj7sgqzsp4TsnYQg7LaU6rCA7ZW0IOyjvOyEuOyalDwvdGl0bGU+CiAgPGRlc2MgaWQ9ImRlc2MiPuuqqOuwlOydvCDssq3ssqnsnqUg7IKs7KeEIOyekOumrCDtkZzsi5zsnpA8L2Rlc2M+CiAgPGRlZnM+CiAgICA8bGluZWFyR3JhZGllbnQgaWQ9ImJnIiB4MT0iMCIgeTE9IjAiIHgyPSIxIiB5Mj0iMSI+PHN0b3Agc3RvcC1jb2xvcj0iI2Q4YzhiYiIvPjxzdG9wIG9mZnNldD0iLjUiIHN0b3AtY29sb3I9IiNmNGVlZTgiLz48c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiNiYmM1YjgiLz48L2xpbmVhckdyYWRpZW50PgogICAgPGZpbHRlciBpZD0iYmx1ciI+PGZlR2F1c3NpYW5CbHVyIHN0ZERldmlhdGlvbj0iMTIiLz48L2ZpbHRlcj4KICA8L2RlZnM+CiAgPHJlY3Qgd2lkdGg9IjEyMDAiIGhlaWdodD0iMTUwMCIgZmlsbD0idXJsKCNiZykiLz4KICA8Y2lyY2xlIGN4PSIxNzAiIGN5PSIyNTAiIHI9IjIwMCIgZmlsbD0iI2Y3ZTVkNyIgb3BhY2l0eT0iLjciIGZpbHRlcj0idXJsKCNibHVyKSIvPgogIDxjaXJjbGUgY3g9Ijk1MCIgY3k9IjExMzAiIHI9IjMwMCIgZmlsbD0iIzkxYTY4ZCIgb3BhY2l0eT0iLjM1IiBmaWx0ZXI9InVybCgjYmx1cikiLz4KICA8ZyBmaWxsPSJub25lIiBzdHJva2U9IiNmZmZhZjUiIHN0cm9rZS13aWR0aD0iNCIgb3BhY2l0eT0iLjgiPjxwYXRoIGQ9Ik0zMjAgNjYwYzE0MC0yMTAgNDIwLTE5MCA1NTAgMTUiLz48cGF0aCBkPSJNMzUwIDcwMGMxMzAgMTYwIDM2MCAxNzAgNTAwIDAiLz48L2c+CiAgPHRleHQgeD0iNjAwIiB5PSI3NjAiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9IiM0YjU1NDkiIGZvbnQtZmFtaWx5PSJzZXJpZiIgZm9udC1zaXplPSIzOCIgbGV0dGVyLXNwYWNpbmc9IjUiPllPVVIgUEhPVE88L3RleHQ+CiAgPHRleHQgeD0iNjAwIiB5PSI4MTUiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9IiM0YjU1NDkiIGZvbnQtZmFtaWx5PSJzYW5zLXNlcmlmIiBmb250LXNpemU9IjIwIiBsZXR0ZXItc3BhY2luZz0iMiI+YXNzZXRzL3Bob3RvcyDtj7TrjZTsl5Ag7IKs7KeE7J2EIOuEo+qzoCDshKTsoJUg7YyM7J2866eMIOuwlOq/lCDso7zshLjsmpQ8L3RleHQ+Cjwvc3ZnPgo="; }, { once: true });
-      button.append(image);
-      button.addEventListener("click", () => {
-        sheet.close();
-        originalItems[index]?.click();
-      });
-      grid.append(button);
-    });
-    sheet.append(handle, head, grid);
-    sheet.addEventListener("click", (event) => { if (event.target === sheet) sheet.close(); });
-    document.body.append(sheet);
-    return sheet;
-  }
-
-  window.addEventListener("load", () => {
-    document.body.classList.add("warm-preview");
-    const message = document.querySelector("#invitation-message");
-    const moments = document.querySelector("#moments");
-    const schedule = document.querySelector("#schedule");
-    if (message && moments && schedule) {
-      message.after(moments);
-      moments.after(schedule);
-    }
-
-    const config = getConfig();
-    const gallery = Array.isArray(config.gallery) ? config.gallery : [];
-    const galleryGrid = document.querySelector("#galleryGrid");
-    const originalItems = Array.from(galleryGrid?.querySelectorAll(".gallery-item") || []);
-    originalItems.forEach((item, index) => item.classList.toggle("gallery-item--warm-hidden", index >= 4));
-
-    const allPhotos = document.querySelector("#galleryMore");
-    if (allPhotos && gallery.length) {
-      allPhotos.hidden = false;
-      allPhotos.textContent = `사진 전체 보기 · ${gallery.length}`;
-      const sheet = createSheet(gallery, originalItems);
-      allPhotos.addEventListener("click", (event) => {
-        event.preventDefault();
-        event.stopImmediatePropagation();
-        if (!sheet.open) sheet.showModal();
-      }, { capture: true });
-    }
-
-    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    const revealTargets = Array.from(document.querySelectorAll(".section:not(.hero), .footer"));
-    revealTargets.forEach((element) => element.classList.add("reveal"));
-    if (reducedMotion || !("IntersectionObserver" in window)) {
-      revealTargets.forEach((element) => element.classList.add("is-visible"));
-      return;
-    }
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add("is-visible");
-          observer.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.14, rootMargin: "0px 0px -28px" });
-    revealTargets.forEach((element) => observer.observe(element));
-  }, { once: true });
-})();
-
-</script>
-    <script>
-(() => {
-  "use strict";
-
-  const fallbackPhoto = "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMjAwIiBoZWlnaHQ9IjE1MDAiIHZpZXdCb3g9IjAgMCAxMjAwIDE1MDAiIHJvbGU9ImltZyIgYXJpYS1sYWJlbGxlZGJ5PSJ0aXRsZSBkZXNjIj4KICA8dGl0bGUgaWQ9InRpdGxlIj7sgqzsp4TsnYQg7LaU6rCA7ZW0IOyjvOyEuOyalDwvdGl0bGU+CiAgPGRlc2MgaWQ9ImRlc2MiPuuqqOuwlOydvCDssq3ssqnsnqUg7IKs7KeEIOyekOumrCDtkZzsi5zsnpA8L2Rlc2M+CiAgPGRlZnM+CiAgICA8bGluZWFyR3JhZGllbnQgaWQ9ImJnIiB4MT0iMCIgeTE9IjAiIHgyPSIxIiB5Mj0iMSI+PHN0b3Agc3RvcC1jb2xvcj0iI2Q4YzhiYiIvPjxzdG9wIG9mZnNldD0iLjUiIHN0b3AtY29sb3I9IiNmNGVlZTgiLz48c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiNiYmM1YjgiLz48L2xpbmVhckdyYWRpZW50PgogICAgPGZpbHRlciBpZD0iYmx1ciI+PGZlR2F1c3NpYW5CbHVyIHN0ZERldmlhdGlvbj0iMTIiLz48L2ZpbHRlcj4KICA8L2RlZnM+CiAgPHJlY3Qgd2lkdGg9IjEyMDAiIGhlaWdodD0iMTUwMCIgZmlsbD0idXJsKCNiZykiLz4KICA8Y2lyY2xlIGN4PSIxNzAiIGN5PSIyNTAiIHI9IjIwMCIgZmlsbD0iI2Y3ZTVkNyIgb3BhY2l0eT0iLjciIGZpbHRlcj0idXJsKCNibHVyKSIvPgogIDxjaXJjbGUgY3g9Ijk1MCIgY3k9IjExMzAiIHI9IjMwMCIgZmlsbD0iIzkxYTY4ZCIgb3BhY2l0eT0iLjM1IiBmaWx0ZXI9InVybCgjYmx1cikiLz4KICA8ZyBmaWxsPSJub25lIiBzdHJva2U9IiNmZmZhZjUiIHN0cm9rZS13aWR0aD0iNCIgb3BhY2l0eT0iLjgiPjxwYXRoIGQ9Ik0zMjAgNjYwYzE0MC0yMTAgNDIwLTE5MCA1NTAgMTUiLz48cGF0aCBkPSJNMzUwIDcwMGMxMzAgMTYwIDM2MCAxNzAgNTAwIDAiLz48L2c+CiAgPHRleHQgeD0iNjAwIiB5PSI3NjAiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9IiM0YjU1NDkiIGZvbnQtZmFtaWx5PSJzZXJpZiIgZm9udC1zaXplPSIzOCIgbGV0dGVyLXNwYWNpbmc9IjUiPllPVVIgUEhPVE88L3RleHQ+CiAgPHRleHQgeD0iNjAwIiB5PSI4MTUiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9IiM0YjU1NDkiIGZvbnQtZmFtaWx5PSJzYW5zLXNlcmlmIiBmb250LXNpemU9IjIwIiBsZXR0ZXItc3BhY2luZz0iMiI+YXNzZXRzL3Bob3RvcyDtj7TrjZTsl5Ag7IKs7KeE7J2EIOuEo+qzoCDshKTsoJUg7YyM7J2866eMIOuwlOq/lCDso7zshLjsmpQ8L3RleHQ+Cjwvc3ZnPgo=";
-
-  function getConfig() {
-    try { return JSON.parse(document.querySelector("#embeddedInvitationConfig")?.textContent || "{}"); } catch { return {}; }
-  }
-
-  function replaceCollageWithGallery(gallery) {
-    const collage = document.querySelector(".moments__collage");
-    if (!collage || !gallery.length) return;
-    const items = gallery.slice(0, 3).map((photo) => {
-      const frame = document.createElement("div");
-      frame.className = "moment";
-      const image = document.createElement("img");
-      image.src = photo.src || fallbackPhoto;
-      image.alt = photo.alt || "두 사람의 사진";
-      image.loading = "lazy";
-      image.addEventListener("error", () => { image.src = fallbackPhoto; }, { once: true });
-      frame.append(image);
-      return frame;
-    });
-    collage.replaceChildren(...items);
-  }
-
-  function mergePhotoStory() {
-    const moments = document.querySelector("#moments");
-    const gallery = document.querySelector("#gallery");
-    if (!moments || !gallery) return;
-    moments.classList.add("photo-story");
-    moments.querySelector(".eyebrow").textContent = "OUR PHOTOS";
-    moments.querySelector(".section-title").textContent = "두 사람의 순간";
-    const description = document.createElement("p");
-    description.className = "section-description";
-    description.textContent = "사진을 누르면 크게 보실 수 있습니다.";
-    const sourceDescription = gallery.querySelector(".section-description");
-    sourceDescription?.remove();
-    const grid = gallery.querySelector("#galleryGrid");
-    const more = gallery.querySelector("#galleryMore");
-    const collage = moments.querySelector(".moments__collage");
-    collage?.after(description, grid, more);
-    gallery.remove();
-  }
-
-  function setupLightboxNavigation() {
-    const dialog = document.querySelector("#lightbox");
-    const image = document.querySelector("#lightboxImage");
-    const previous = document.querySelector("#lightboxPrevious");
-    const next = document.querySelector("#lightboxNext");
-    if (!dialog || !image || !previous || !next) return;
-
-    const animate = (direction) => {
-      image.classList.remove("slide-next", "slide-prev");
-      void image.offsetWidth;
-      image.classList.add(direction === "next" ? "slide-next" : "slide-prev");
-    };
-    next.addEventListener("click", () => animate("next"), { capture: true });
-    previous.addEventListener("click", () => animate("prev"), { capture: true });
-    image.addEventListener("animationend", () => image.classList.remove("slide-next", "slide-prev"));
-
-    let startX = null;
-    dialog.addEventListener("pointerdown", (event) => { if (dialog.open) startX = event.clientX; });
-    dialog.addEventListener("pointerup", (event) => {
-      if (startX === null) return;
-      const distance = event.clientX - startX;
-      startX = null;
-      if (Math.abs(distance) < 45) return;
-      if (distance < 0) next.click();
-      else previous.click();
-    });
-    dialog.addEventListener("pointercancel", () => { startX = null; });
-  }
-
-  window.addEventListener("load", () => {
-    document.body.classList.add("popup-preview");
-    const config = getConfig();
-    replaceCollageWithGallery(Array.isArray(config.gallery) ? config.gallery : []);
-    mergePhotoStory();
-    setupLightboxNavigation();
-  }, { once: true });
+  app.innerHTML = appMarkup();
+  setupPetalVariation();
+  renderCountdown();
+  window.setInterval(renderCountdown, 1000);
+  setupEvents();
+  setupReveal();
 })();
 
 </script>
