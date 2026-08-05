@@ -12,13 +12,9 @@
     <meta property="og:title" content="도희♡혜지 결혼합니다." />
     <meta property="og:description" content="27년 1월 30일 오후 3시 20분 더 컨벤션 송파문정" />
     <meta property="og:url" content="https://kdh96.github.io/ki_soh_wedding/" />
-    <meta property="og:image" content="https://kdh96.github.io/ki_soh_wedding/og-image.jpg" />
-    <meta property="og:image:width" content="1200" />
-    <meta property="og:image:height" content="630" />
-    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:card" content="summary" />
     <meta name="twitter:title" content="도희♡혜지 결혼합니다." />
     <meta name="twitter:description" content="27년 1월 30일 오후 3시 20분 더 컨벤션 송파문정" />
-    <meta name="twitter:image" content="https://kdh96.github.io/ki_soh_wedding/og-image.jpg" />
     <style>
 @import url("https://fonts.googleapis.com/css2?family=Monsieur+La+Doulaise&display=swap");
 
@@ -514,7 +510,7 @@ img { display: block; max-width: 100%; }
     document.querySelector("#shareKakao").addEventListener("click", async () => {
       if (navigator.share) {
         try {
-          await navigator.share({ title: document.title, text: "기도희 · 소혜지의 모바일 청첩장", url: location.href });
+        await navigator.share({ title: document.title, text: "도희♡혜지 결혼합니다.\n27년 1월 30일 오후 3시 20분 더 컨벤션 송파문정", url: location.href });
           return;
         } catch (error) {
           if (error?.name === "AbortError") return;
