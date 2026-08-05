@@ -2,7 +2,7 @@
 <html lang="ko">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=5, user-scalable=yes, viewport-fit=cover" />
     <meta name="theme-color" content="#fbf5ef" />
     <title>도희♡혜지 결혼합니다.</title>
     <meta name="description" content="27년 1월 30일 오후 3시 20분 더 컨벤션 송파문정" />
@@ -74,7 +74,7 @@ img { display: block; max-width: 100%; }
 .family p strong b { font-size: 15px; font-weight: 700; }
 
 .gallery-heading { margin: 0 17px; color: var(--rose); font-size: 10px; font-weight: 800; letter-spacing: .24em; line-height: 1.2; text-transform: uppercase; white-space: nowrap; }
-.photo-story { width: 100%; max-width: none; margin: 25px auto 0; outline: none; touch-action: pan-y; }
+.photo-story { width: 100%; max-width: none; margin: 25px auto 0; outline: none; touch-action: pan-y pinch-zoom; }
 .photo-story:focus-visible { outline: 2px solid rgba(201,137,131,.6); outline-offset: 8px; }
 #moments { padding-right: 8px; padding-left: 8px; background: #fffdfa; }
 .photo-story__frame { overflow: hidden; padding: 6px; border: 1px solid rgba(178, 142, 120, .18); background: rgba(255, 255, 255, .58); box-shadow: 0 14px 34px rgba(112, 80, 63, .08); backdrop-filter: blur(9px); }
@@ -335,6 +335,50 @@ img { display: block; max-width: 100%; }
     else window.prompt("복사해 주세요.", value);
   }
 
+  const publicInvitationUrl = "https://kdh96.github.io/ki_soh_wedding/";
+  const kakaoShareText = "도희♡혜지 결혼합니다.\n27년 1월 30일 오후 3시 20분 더 컨벤션 송파문정";
+  let kakaoShareSdk;
+
+  function loadKakaoShareSdk() {
+    if (window.Kakao?.Share) {
+      if (!window.Kakao.isInitialized()) window.Kakao.init(invitation.kakaoMapKey);
+      return Promise.resolve(window.Kakao);
+    }
+    if (kakaoShareSdk) return kakaoShareSdk;
+    kakaoShareSdk = new Promise((resolve, reject) => {
+      const script = document.createElement("script");
+      script.async = true;
+      script.dataset.kakaoShareSdk = "true";
+      script.src = "https://t1.kakaocdn.net/kakao_js_sdk/2.8.1/kakao.min.js";
+      script.onload = () => {
+        try {
+          window.Kakao.init(invitation.kakaoMapKey);
+          resolve(window.Kakao);
+        } catch (error) {
+          reject(error);
+        }
+      };
+      script.onerror = () => reject(new Error("Kakao JavaScript SDK를 불러오지 못했습니다."));
+      document.head.append(script);
+    });
+    return kakaoShareSdk;
+  }
+
+  async function shareWithKakao() {
+    try {
+      const kakao = await loadKakaoShareSdk();
+      kakao.Share.sendDefault({
+        objectType: "text",
+        text: kakaoShareText,
+        link: { mobileWebUrl: publicInvitationUrl, webUrl: publicInvitationUrl }
+      });
+      return true;
+    } catch (error) {
+      console.warn("Kakao Talk share unavailable", error);
+      return false;
+    }
+  }
+
   function accountMarkup(item) {
     return `<article class="account"><div><small>${escape(item.relation)}</small><strong>${escape(item.name)}</strong></div><p>${escape(item.bank)} <span>${escape(item.number)}</span></p><button type="button" data-copy-account="${escape(item.number)}">계좌번호 복사</button></article>`;
   }
@@ -509,9 +553,10 @@ img { display: block; max-width: 100%; }
     document.querySelector("#copyAddress").addEventListener("click", () => copyText(invitation.address));
     document.querySelector("#shareCopy").addEventListener("click", () => copyText(location.href));
     document.querySelector("#shareKakao").addEventListener("click", async () => {
+      if (await shareWithKakao()) return;
       if (navigator.share) {
         try {
-        await navigator.share({ title: document.title, text: "도희♡혜지 결혼합니다.\n27년 1월 30일 오후 3시 20분 더 컨벤션 송파문정", url: location.href });
+        await navigator.share({ title: document.title, text: kakaoShareText, url: publicInvitationUrl });
           return;
         } catch (error) {
           if (error?.name === "AbortError") return;
