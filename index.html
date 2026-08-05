@@ -73,15 +73,15 @@ img { display: block; max-width: 100%; }
 .family p strong small { color: var(--muted); font-size: 15px; font-weight: 400; }
 .family p strong b { font-size: 15px; font-weight: 700; }
 
-.gallery-heading { margin: 0; color: #c58d83; font-family: var(--script); font-size: clamp(39px, 11vw, 54px); font-weight: 400; line-height: .86; white-space: nowrap; }
-.photo-story { width: min(100%, 420px); margin: 25px auto 0; outline: none; touch-action: pan-y; }
+.gallery-heading { margin: 0 17px; color: #c58d83; font-family: var(--script); font-size: clamp(39px, 11vw, 54px); font-weight: 400; line-height: .86; white-space: nowrap; }
+.photo-story { width: 100%; max-width: none; margin: 25px auto 0; outline: none; touch-action: pan-y; }
 .photo-story:focus-visible { outline: 2px solid rgba(201,137,131,.6); outline-offset: 8px; }
-#moments { background: #fffdfa; }
-.photo-story__frame { overflow: hidden; padding: 11px; border: 1px solid rgba(178, 142, 120, .18); background: rgba(255, 255, 255, .58); box-shadow: 0 14px 34px rgba(112, 80, 63, .08); backdrop-filter: blur(9px); }
-.photo-story__frame img { display: block; width: 100%; aspect-ratio: 4 / 5; object-fit: cover; }
+#moments { padding-right: 8px; padding-left: 8px; background: #fffdfa; }
+.photo-story__frame { overflow: hidden; padding: 6px; border: 1px solid rgba(178, 142, 120, .18); background: rgba(255, 255, 255, .58); box-shadow: 0 14px 34px rgba(112, 80, 63, .08); backdrop-filter: blur(9px); }
+.photo-story__frame img { display: block; width: 100%; aspect-ratio: 2 / 3; object-fit: cover; }
 .photo-story__image--from-right { animation: enterFromRight .56s cubic-bezier(.22,.61,.36,1); }
 .photo-story__image--from-left { animation: enterFromLeft .56s cubic-bezier(.22,.61,.36,1); }
-.photo-story__caption { min-height: 25px; margin: 15px 0 0; font-family: "Nanum Myeongjo", serif; font-size: 15px; }
+.photo-story__caption { display: none; }
 .photo-story__controls { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; margin: 11px 0 0; border-top: 1px solid rgba(93,72,63,.15); border-bottom: 1px solid rgba(93,72,63,.15); }
 .photo-story__nav { width: 44px; height: 39px; padding: 0; border: 0; color: #856a5b; background: transparent; font-family: Georgia, serif; font-size: 34px; line-height: 1; transition: color .2s ease, transform .2s ease; }
 .photo-story__nav:hover, .photo-story__nav:focus-visible { color: var(--rose); transform: scale(1.14); }
