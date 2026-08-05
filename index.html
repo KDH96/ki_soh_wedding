@@ -292,7 +292,7 @@ img { display: block; max-width: 100%; }
   }
 
   function guestbookModalMarkup() {
-    return `<div class="modal" id="guestbookWriteModal" hidden><button class="modal__backdrop" type="button" data-close-modal aria-label="방명록 작성 닫기"></button><section class="modal__dialog" role="dialog" aria-modal="true" aria-labelledby="guestbookWriteTitle" tabindex="-1"><button class="modal__close" type="button" data-close-modal aria-label="닫기">×</button><p class="modal__eyebrow">GUESTBOOK</p><h2 id="guestbookWriteTitle">축하 메시지 작성하기</h2><p class="modal__description">저희 둘의 결혼을 함께 축하해 주세요.</p><form class="guestbook-form" id="guestbookForm"><label><span class="sr-only">성함</span><input id="guestbookName" name="name" maxlength="20" required autocomplete="name" placeholder="성함을 남겨주세요" /></label><label><span class="sr-only">비밀번호</span><input name="password" type="password" inputmode="numeric" minlength="4" maxlength="20" required autocomplete="new-password" placeholder="비밀번호를 입력해 주세요" /></label><label><span class="sr-only">축하 메시지</span><textarea id="guestbookMessage" name="message" maxlength="200" required placeholder="200자 이내로 작성해 주세요"></textarea></label><p class="guestbook-form__status" id="guestbookFormStatus" aria-live="polite"></p><button class="guestbook-form__submit" type="submit">작성 완료</button></form></section></div><div class="modal modal--list" id="guestbookAllModal" hidden><button class="modal__backdrop" type="button" data-close-modal aria-label="방명록 전체 보기 닫기"></button><section class="modal__dialog" role="dialog" aria-modal="true" aria-labelledby="guestbookAllTitle" tabindex="-1"><button class="modal__close" type="button" data-close-modal aria-label="닫기">×</button><p class="modal__eyebrow">GUESTBOOK</p><h2 id="guestbookAllTitle">방명록 전체보기</h2><div class="modal__messages" id="guestbookAllList"></div></section></div>`;
+    return "";
   }
 
   function appMarkup() {
@@ -518,7 +518,6 @@ img { display: block; max-width: 100%; }
       }
       copyText(location.href);
     });
-    setupGuestbook();
   }
 
   function setupReveal() {
@@ -537,6 +536,7 @@ img { display: block; max-width: 100%; }
   }
 
   app.innerHTML = appMarkup();
+  document.querySelector(".section--guestbook")?.remove();
   renderScheduleTime();
   setupPetalVariation();
   renderCountdown();
