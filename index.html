@@ -538,6 +538,9 @@ img { display: block; max-width: 100%; }
 
   app.innerHTML = appMarkup();
   document.querySelector(".section--guestbook")?.remove();
+  const momentsSection = document.querySelector("#moments");
+  const daySection = document.querySelector(".section--day");
+  if (momentsSection && daySection) momentsSection.before(daySection);
   renderScheduleTime();
   setupPetalVariation();
   renderCountdown();
